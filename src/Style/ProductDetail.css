@@ -1,0 +1,68 @@
+.compact-table th,
+.compact-table td {
+    padding: 8px 12px; /* Reduce padding */
+    font-size: 14px; /* Smaller font size */
+}
+
+.compact-table th {
+    background-color: #f1f1f1; /* Slightly different background for headers */
+    color: #333; /* Darker text for headers */
+}
+
+.compact-table td {
+    border-top: 1px solid #e1e1e1; /* Add border to separate rows */
+}
+
+.compact-table img {
+    width: 100px; /* Smaller image size */
+    height: 100px; /* Maintain aspect ratio */
+    object-fit: cover;
+}
+
+.compact-table .actions {
+    gap: 1rem;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.compact-table .actions .edit,
+.compact-table .actions .delete {
+    cursor: pointer;
+    transition: color 0.3s;
+    color: white;
+    padding: 0.5rem 1.2rem;
+    border: none;
+    background-color: var(--color1);
+}
+
+.compact-table .actions .edit:hover {
+    background-color: green;
+    color:white;
+}
+
+.compact-table .actions .delete:hover {
+    color:white;
+    background-color: red;
+}
+
+
+
+.loader-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@media (max-width: 768px) {
+    .compact-table th, .compact-table td {
+        padding: 6px 8px; /* Further reduce padding for smaller screens */
+        font-size: 12px; /* Even smaller font size for smaller screens */
+    }
+
+    .compact-table img {
+        width: 40px; /* Smaller image size for smaller screens */
+        height: 40px; /* Maintain aspect ratio */
+    }
+}

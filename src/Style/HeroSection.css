@@ -1,0 +1,157 @@
+#hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+}
+
+.banner {
+  width: 100%;
+  height: 46.5vw;
+  object-fit: fill;
+}
+
+.hero-heading {
+  position: absolute;
+  top: 5%;
+  right: 3px;
+  font-family: "Charmonman", cursive;
+  font-style: italic;
+  width: 40%;
+  font-size: 2.5em;
+  color: var(--color1);
+  font-weight: bolder;
+  text-wrap: nowrap;
+  background: linear-gradient(270deg, rgba(255, 255, 255, 0.753) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hero-title {
+  position: absolute;
+  bottom: 3%;
+  left: 3px;
+  font-family: "Charmonman", cursive;
+  font-style: italic;
+  width: 40%;
+  font-size: 2.5em;
+  color: var(--color1);
+  font-weight: bolder;
+  text-wrap: nowrap;
+  background: linear-gradient(90deg, rgb(250, 250, 250) 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.hero-icons-left, .hero-icons-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 3.6vh;
+  width: 2.4vw;
+  border-radius: 1400px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.hero-icons-left {
+  left: 2rem;
+}
+
+.hero-icons-right {
+  right: 2rem;
+}
+
+.hero-bannerSlides {
+  display: none;
+  position: relative;
+}
+
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 2px 4px;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.1s ease;
+  z-index: 1;
+}
+
+/* .active {
+  background-color: var(--color6);
+} */
+
+.fade {
+  animation-name: fade;
+  animation-duration: 4s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+
+@media (max-width: 1080px) and (min-width: 768px) {
+  .hero-heading, .hero-title {
+    width: 40%;
+    font-size: 2em;
+  }
+  .banner {
+    height: 50vw;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .hero-heading, .hero-title {
+    width: 40%;
+    font-size: 1.5em;
+  }
+
+  .banner {
+    height: 50vw;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-heading, .hero-title {
+    width: 40%;
+    font-size: 1em;
+  }
+  .hero-icons-left, .hero-icons-right {
+    height: 2vh;
+    width: 4vw;
+  }
+  .banner {
+    height: 50vw;
+  }
+}
+
+
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}

@@ -1,0 +1,163 @@
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background-color: transparent;
+  position: relative;
+  z-index: 1000; /* Ensure header is above other content */
+
+}
+
+#header {
+  width: 100%;
+  padding: 0 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  height: 5rem;
+  border-bottom: 1px solid var(--color1);   
+}
+
+#logo {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  object-fit: contain;
+}
+
+#icons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2rem;
+}
+
+#icons a {
+  position: relative;
+}
+
+#icons a:not(:last-child)::after {
+  content: "";
+  height: 1.5rem;
+  width: 1px;
+  position: absolute;
+  right: -1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: transparent;
+}
+
+.icons {
+  color: var(--color1);
+}
+
+.search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  cursor: pointer;
+}
+
+nav {
+  background-color: transparent;
+}
+
+menu {
+    display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+menu li {
+  list-style: none;
+  margin: 0 1.5rem;
+  font-family: var(--font1);
+  font-size: 1.1rem;
+  color: var(--color6);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+menu li:hover {
+  color: var(--color1);
+}
+
+@media (max-width: 1000px) {
+  
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: transparent;
+  position: relative;
+  width: 100%;
+  z-index: 1000; /* Ensure header is above other content */
+}
+  #header {
+    padding: 0rem 1rem;
+
+    justify-content: space-between;
+    }
+
+  #icons {
+    justify-content: flex-start;
+    gap: 1.2rem;
+  }
+
+  #icons a:not(:last-child)::after {
+    display: none;
+  }
+
+  #logo {
+    order: 2;
+  }
+
+  .hamburger-menu {
+    display: block;
+    order: 1;
+  }
+
+  nav {width: 100%;
+    position: absolute;
+    top: 4rem; /* Position below header */
+    left: 0;
+    z-index: 999; /* Ensure nav is above other content */
+    display: none;
+  }
+
+  nav.mobile-menu-open {
+    display: block;
+  }
+
+  menu {
+    flex-direction: column;
+    display: none;
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background */
+    padding: 1rem 0;
+    width: 100%;
+  }
+
+  menu.mobile-menu-open {
+    display: flex;
+  }
+
+  menu li {
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem 0;
+    padding: 0.5rem 0;
+  }
+}
+
+@media (min-width: 1000px) {
+  .hamburger-menu {
+    display: none;
+  }
+}

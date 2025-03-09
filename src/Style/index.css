@@ -1,0 +1,56 @@
+  
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Playwrite+MX:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&display=swap');
+  
+@import url('https://fonts.googleapis.com/css2?family=Charmonman:wght@400;700&display=swap');
+
+:root {
+  --font: "Poppins", sans-serif;
+  
+}
+#root {
+  display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+   font-family: var(--font);
+  --color1: #008AD1;  
+  --color4: #f1f1f1;
+  --color5: #ffffff;
+  --color6: #292929;  
+  --color7: #ffffff81;
+  text-align: center; 
+  text-transform: capitalize; 
+}
+
+
+* {
+  margin: 0px;
+  padding: 0px;
+  text-decoration: none;
+  list-style: none;
+ box-sizing: border-box;
+ font-family: var(--font);
+}
+  a{
+    text-decoration: none;
+    cursor: pointer;
+    font-family: var(--font);
+  }
+
+  a, a:visited, a:hover, a:active {
+    color: inherit;
+  }
+
+  link{
+    text-decoration: none;
+    cursor: pointer;
+    font-family: var(--font);
+  }
+/* .btn {
+  padding: 5px 20px;
+  border: 1px solid var(--color1);
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+} */
+

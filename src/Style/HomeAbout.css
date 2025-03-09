@@ -1,0 +1,10 @@
+#HomeAbout{
+  display: flex;
+  margin: 1rem 5rem;
+  
+}
+
+#HomeAbout-img{
+  width: 500px;
+  height: 45%;
+}

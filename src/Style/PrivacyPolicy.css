@@ -1,0 +1,70 @@
+.policy-container, .terms-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+  }
+  
+  .policy-title, .terms-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .policy-date, .terms-date {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 20px;
+  }
+  
+  .policy-container h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+
+  
+  .policy-container address {
+    font-style: normal;
+    margin-bottom: 20px;
+  }
+
+  
+  @media (max-width: 768px) {
+    .policy-container, .terms-container {
+      padding: 10px;
+    }
+  
+    .policy-title, .terms-title {
+      font-size: 22px;
+    }
+  
+    .policy-container h2 {
+      font-size: 18px;
+    }
+  
+    .policy-container p {
+      font-size: 14px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .policy-container, .terms-container {
+      padding: 5px;
+    }
+  
+    .policy-title, .terms-title {
+      font-size: 20px;
+    }
+  
+    .policy-container h2 {
+      font-size: 16px;
+    }
+  
+    .policy-container p {
+      font-size: 12px;
+    }
+  }
+  

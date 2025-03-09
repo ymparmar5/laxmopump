@@ -1,0 +1,136 @@
+.search-bar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+  }
+  
+  .input-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  
+  .search-input {
+
+    margin: 0rem -2rem ;
+    border: none;
+    padding: 8px 35px 8px  8px;
+    width: 30vw;  
+    
+    background-color:transparent ;
+    border-radius: 50rem;
+    outline: 0.5px solid var(--color1);
+    }
+  
+
+  
+  .dropdown-container {
+    position: absolute;
+    top: 55px;
+    width: 90%;
+    height:max-content;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.808);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .search-dropdown {
+    width: 100%;
+    max-height:max-content;
+    overflow-y: auto;
+  }
+  
+  .dropdown-item {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: var(--color5);
+    background-color: var(--color1);
+    transition: background-color 0.3s;
+    border: 1px solid white;
+  }
+  
+  .dropdown-item:hover {
+    color: var(--color1);
+    background-color: var(--color5);
+  }
+  
+  .item-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .item-image {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .no-results-image {
+    width: 50px;
+    height: 50px;
+  }
+  @media (max-width: 1000px) {
+    .search-input {
+
+      margin: 0rem -2rem ;
+      width: 45vw;
+      }
+      .dropdown-container {
+        position: absolute;
+        top: 50px;
+        right: 45px;
+        width: 110%;
+
+      }
+ 
+      .search-dropdown {
+        width: 100%;
+        max-height:max-content;
+        overflow-y: auto;
+      }
+    
+    
+  }
+
+  @media (max-width: 400px) {
+    .search-input {
+
+      margin: 0rem -2rem ;
+      width: 50vw;
+      }
+      
+      .search-dropdown {
+        width: 125%;
+        max-height:max-content;
+        overflow-y: auto;
+      }
+      .dropdown-item {
+        padding: 10px;
+      }
+    
+  }
+
+  @media (max-width: 376px) {
+    .search-input {
+      margin: 0rem -2rem ;
+      width: 40vw;
+      }
+      
+      .search-dropdown {
+        width: 180%;
+        max-height:max-content;
+        overflow-y: auto;
+      }
+      .dropdown-item {
+        padding: 5px;
+      }
+    
+  }
