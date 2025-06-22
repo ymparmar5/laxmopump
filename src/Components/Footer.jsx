@@ -15,29 +15,30 @@ const Footer = () => {
   return (
     <>
       <div className="footer-top" >
-        <a href="/LAXMO.pdf" download="catlog-loxmo" >
-          <i className="fa-solid fa-file-pdf fa-2xl"></i>
-        </a>
+     <a href="/catlog-loxmo.pdf" download="catlog-loxmo">
+  <i className="fa-solid fa-file-pdf fa-2xl red-icon"></i>
+</a>
 
 
-          {/* <a href="https://wa.me/918000081161">
+
+          <a href="https://wa.me/919316755501">
             <img src="/whatsapp.png" alt="whatsapp" className="whatsapp" />
-          </a> */}
+          </a>
 
         <div id="footer-icons">
             <a  href="https://www.t.me/AardipJogani " target="_blank" > <img src="./telegram.png" className="footer-icons "></img></a>
-            <a  href="mailto:laxmopump@gmail.com" target="_blank" > <img src="./email.png"  className="footer-icons "  ></img></a>
+            <a  href="mailto:laxmoindustries@gmail.com" target="_blank" > <img src="./email.png"  className="footer-icons "  ></img></a>
             <a  href="https://www.instagram.com/laxmo_technology/" target="_blank" > <img src="./instagram.png"  className="footer-icons "></img></a>
             <a  href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9" target="_blank" > <img src="./map.png"  className="footer-icons  "></img></a>
             <a  href="https://www.facebook.com/people/Laxmo-Pump/pfbid02vTXqfRy7wGahrG7BFBnA2oP9mh13WPT8Evduj5SycwExH1HkotKJMwYGSKrnnHAZl/" target="_blank" > <img src="./facebook.png" className="footer-icons "></img> </a>
             <a  href="https://www.linkedin.com/in/laxmo-pumps-water-pump-791492205/" target="_blank" > <img src="./linkedin.png" className="footer-icons "></img> </a>
-            <a  href="https://wa.me/918000081161" target="_blank" > <img src="./whatsapp.png"  className="footer-icons "></img> </a>
+            <a  href="https://wa.me/919316755501" target="_blank" > <img src="./whatsapp.png"  className="footer-icons "></img> </a>
             <a  href="https://www.youtube.com/@laxmopumps9657" target="_blank" > <img src="./youtube.png"  className="footer-icons "></img> </a>
             <a  href="https://linktr.ee/f5yr6tf?utm_source=linktree_admin_share" target="_blank" > <img src="./qr-code.png"  className="footer-icons "></img> </a>
 
           </div>
 
-        <button id="get-connect" onClick={handleDownload}>View Certificates</button>
+        {/* <button id="get-connect" onClick={handleDownload}>View Certificates</button> */}
 
       </div>
       <footer>

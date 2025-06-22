@@ -46,7 +46,7 @@ const PrivacyPolicy = () => {
       <address>
       Laxmo Pump<br />
         Email:laxmopumponline@gmail.com<br />
-        Phone:   +91 8000081161<br />
+        Phone:   +91 9316755501<br />
         Address: 104/C Block, Orchid Green,
                     LP Savani Rd, Palanpur,
                     Surat, 395009, Gujarat, India
@@ -62,7 +62,7 @@ const PrivacyPolicy = () => {
       <address>
       Laxmo Pump<br />
         Email:laxmopumponline@gmail.com<br />
-        Phone:   +91 8000081161<br />
+        Phone:   +91 9316755501<br />
         Address: Kevadiya Farm,
 Nr. Sahaj Imperia, Dabholi,
 Surat, 395004, Gujarat, India
@@ -70,7 +70,7 @@ Surat, 395004, Gujarat, India
       <h1 className="policy-title">Shipping Policy</h1>
       <p className="policy-date">Last updated: [10/6/2024]</p>
       <p>
-        Orders are processed within [+91 8000081161] business days. Shipping charges
+        Orders are processed within [+91 9316755501] business days. Shipping charges
         will be displayed at checkout. We are not liable for any products
         damaged or lost during shipping or for any shipping delays.
         <br />
@@ -81,7 +81,7 @@ Surat, 395004, Gujarat, India
       <address>
         Laxmo Pump<br />
         Email:laxmopumponline@gmail.com<br />
-        Phone:   +91 8000081161<br />
+        Phone:   +91 9316755501<br />
         Address: Kevadiya Farm,
 Nr. Sahaj Imperia, Dabholi,
 Surat, 395004, Gujarat, India

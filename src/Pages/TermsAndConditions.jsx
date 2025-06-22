@@ -73,7 +73,7 @@ const TermsAndConditions = () => {
       <address>
       Laxmo Pump<br />
         Email:laxmopumponline@gmail.com<br />
-        Phone:   +91 8000081161<br />
+        Phone:   +91 9316755501<br />
         Address: 104/C Block, Orchid Green,
                     LP Savani Rd, Palanpur,
                     Surat, 395009, Gujarat, India

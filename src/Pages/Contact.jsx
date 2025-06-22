@@ -8,11 +8,11 @@ const Contact = () => {
       <div id="main">
         <div id="contact-info">
           <img src="/telecall.png" />
-          <a href="tel:8000081161">
-            <b  >Phone:</b> &nbsp; +91 8000081161 <br /><br />
+          <a href="tel:9316755501">
+            <b  >Phone:</b> &nbsp; +91 9316755501 <br /><br />
           </a>
-          <a href="mailto:laxmopump@gmail.com">
-            <b>Email:</b> &nbsp; laxmopump@gmail.com <br /><br />
+          <a href="mailto:laxmoindustries@gmail.com">
+            <b>Email:</b> &nbsp; laxmoindustries@gmail.com <br /><br />
           </a>
           <a href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9">
             <b>Address:</b> &nbsp; Kevadiya Farm,<br />
@@ -26,12 +26,12 @@ const Contact = () => {
 
           <div id="contact-icons">
             <a href="https://www.t.me/AardipJogani " target="_blank" > <img src="./telegram.png" className="contact-icons"></img></a>
-            <a href="mailto:laxmopump@gmail.com" target="_blank" > <img src="./email.png" className="contact-icons"  ></img></a>
+            <a href="mailto:laxmoindustries@gmail.com" target="_blank" > <img src="./email.png" className="contact-icons"  ></img></a>
             <a href="https://www.instagram.com/laxmo_technology/" target="_blank" > <img src="./instagram.png" className="contact-icons "></img></a>
             <a href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9" target="_blank" > <img src="./map.png" className="contact-icons  "></img></a>
             <a href="https://www.facebook.com/people/Laxmo-Pump/pfbid02vTXqfRy7wGahrG7BFBnA2oP9mh13WPT8Evduj5SycwExH1HkotKJMwYGSKrnnHAZl/" target="_blank" > <img src="./facebook.png" className="contact-icons "></img> </a>
             <a href="https://www.linkedin.com/in/laxmo-pumps-water-pump-791492205/" target="_blank" > <img src="./linkedin.png" className="contact-icons "></img> </a>
-            <a href="https://wa.me/918000081161" target="_blank" > <img src="./whatsapp.png" className="contact-icons "></img> </a>
+            <a href="https://wa.me/919316755501" target="_blank" > <img src="./whatsapp.png" className="contact-icons "></img> </a>
             <a href="https://www.youtube.com/@laxmopumps9657" target="_blank" > <img src="./youtube.png" className="contact-icons "></img> </a>
           </div>
 
