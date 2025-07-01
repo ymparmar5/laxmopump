@@ -12,19 +12,24 @@ const AdminDashboard = () => {
     return (
         <div className="dashboard-container">
             <div className="user-info-container">
-                <img className="user-photo" src="/admin.png" alt="User" />
+                <img className="user-photo" src="/admin.enc" alt="User" />
                 <div className="user-details">
                     <h1><span className="font-bold">Name: </span>{user?.name}</h1>
                     <h1><span className="font-bold">Email: </span>{user?.email}</h1>
                     <h1><span className="font-bold">Role: </span>{user?.role}</h1>
                 </div>
-                <Link  to={'/AddProductPage'}>
+                <Link to={'/AddProductPage'}>
                     <button className="compact-button">Add Product</button>
                 </Link>
+                <Link to={'/AddUpdateImage'}>
+                    <button className="compact-button">Add/Update Images</button>
+                </Link>
+               
+
             </div>
 
             <div className="product-info">
-               
+
                 <div className="add-product">
                     <ProductDetail />
                 </div>

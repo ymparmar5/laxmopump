@@ -24,6 +24,7 @@ import SignIN from "./Pages/SignIn";
 import TermsAndConditions from "./Pages/TermsAndConditions";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Certificates from "./Pages/Certificates";
+import AddUpdateImage from "./Components/Admin/AddUpdateImage";
 
 const App = () => {
 
@@ -63,6 +64,11 @@ const App = () => {
           <Route path="/AddProductPage" element={
             <ProtectedRouteForAdmin >
               <AddProductPage />
+            </ProtectedRouteForAdmin>} />
+
+            <Route path="/AddUpdateImage" element={
+            <ProtectedRouteForAdmin >
+              <AddUpdateImage />
             </ProtectedRouteForAdmin>} />
 
           <Route path="/update-product/:id" element={
