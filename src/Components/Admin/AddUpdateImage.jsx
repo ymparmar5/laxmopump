@@ -534,17 +534,7 @@ const AddUpdateImage = () => {
           }}>
             {renderImageInputs("home", homeImages)}
           </div>
-          <button 
-            className="add-product-add-btn" 
-            onClick={() => saveImages("home")}
-            disabled={loading}
-            style={{ 
-              opacity: loading ? 0.6 : 1,
-              cursor: loading ? 'not-allowed' : 'pointer'
-            }}
-          >
-            {loading ? 'Saving...' : 'Save Home Images'}
-          </button>
+       
         </div>
         
         <div className="preview-gallery" style={{ marginTop: '30px' }}>
@@ -567,6 +557,17 @@ const AddUpdateImage = () => {
             </div>
           )}
         </div>
+           <button 
+            className="add-product-add-btn" 
+            onClick={() => saveImages("home")}
+            disabled={loading}
+            style={{ 
+              opacity: loading ? 0.6 : 1,
+              cursor: loading ? 'not-allowed' : 'pointer'
+            }}
+          >
+            {loading ? 'Saving...' : 'Save Home Images'}
+          </button>
       </div>
 
       {/* About Images */}
@@ -586,17 +587,7 @@ const AddUpdateImage = () => {
           }}>
             {renderImageInputs("about", aboutImages)}
           </div>
-          <button 
-            className="add-product-add-btn" 
-            onClick={() => saveImages("about")}
-            disabled={loading}
-            style={{ 
-              opacity: loading ? 0.6 : 1,
-              cursor: loading ? 'not-allowed' : 'pointer'
-            }}
-          >
-            {loading ? 'Saving...' : 'Save About Images'}
-          </button>
+         
         </div>
         
         <div className="preview-gallery" style={{ marginTop: '30px' }}>
@@ -619,7 +610,19 @@ const AddUpdateImage = () => {
             </div>
           )}
         </div>
+         <button 
+            className="add-product-add-btn" 
+            onClick={() => saveImages("about")}
+            disabled={loading}
+            style={{ 
+              opacity: loading ? 0.6 : 1,
+              cursor: loading ? 'not-allowed' : 'pointer'
+            }}
+          >
+            {loading ? 'Saving...' : 'Save About Images'}
+          </button>
       </div>
+
     </div>
   );
 };

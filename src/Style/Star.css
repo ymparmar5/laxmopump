@@ -1,0 +1,32 @@
+/* Star.css */
+
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: medium;
+  font-weight: 500;
+}
+
+.star-image {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+/* Optional: Add hover effect */
+.star-image:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
+}
+
+/* Different sizes if needed */
+.star-rating.small .star-image {
+  width: 16px;
+  height: 16px;
+}
+
+.star-rating.large .star-image {
+  width: 28px;
+  height: 28px;
+}

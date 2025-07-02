@@ -17,7 +17,9 @@ const AddProductPage = () => {
         imgurl3: "",
         imgurl4: "",
         imgurl5: "",
-        bestSell:"",
+        bestSell: "",
+        review: "",
+        star: "",
         category1: "",
         subcategory1: "",
         category2: "",
@@ -124,20 +126,12 @@ const AddProductPage = () => {
                                 value={product.title}
                                 onChange={(e) => setProduct({ ...product, title: e.target.value })}
                             />
-                            <div>
-                            <select onChange={(e) => setProduct({ ...product, bestSell: e.target.value })} value={product.bestSell}>
-        <option value="">Best Selling?</option>
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-    </select>
-                            <div>
-   
-</div>
 
-                            </div>
-                           
+
+
                         </div>
                     </div>
+                   
                     <div className="add-product-form-row">
                         <div className="add-product-form-group">
                             <input
@@ -225,7 +219,7 @@ const AddProductPage = () => {
                                 onChange={(e) => setProduct({ ...product, specification: e.target.value })}
                                 rows={7}
                             />
-                        </div>  
+                        </div>
                     </div>
                     <div className="add-product-form-row">
                         <div className="add-product-form-group">
@@ -237,9 +231,7 @@ const AddProductPage = () => {
                             />
                         </div>
                     </div>
-                    <button className="add-product-btn add-product-submit-btn" onClick={addProduct}>
-                        Add Product
-                    </button>
+
                 </div>
                 <div className="add-product-add-category-section">
                     <input
@@ -251,7 +243,7 @@ const AddProductPage = () => {
                     <button className="add-product-add-btn" onClick={handleAddCategory}>
                         Add Category
                     </button>
-                  
+
                 </div>
                 <div className="add-product-add-subcategory-section">
                     <select
@@ -274,9 +266,17 @@ const AddProductPage = () => {
                     <button className="add-product-add-btn" onClick={handleAddSubcategory}>
                         Add Subcategory
                     </button>
-                   
+
                 </div>
+                <div className="add-product-add-subcategory-section">
+
+                    <button className="add-product-btn add-product-submit-btn" onClick={addProduct}>
+                        Add Product
+                    </button>
+                </div>
+
             </div>
+
         </div>
     );
 };

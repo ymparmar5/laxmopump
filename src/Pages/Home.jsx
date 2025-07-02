@@ -19,7 +19,7 @@ const Home = () => {
       const scrollPercentage = (scrollPosition + windowHeight) / documentHeight * 100;
       
       // Show popup when user scrolls 40% of the page
-      if (scrollPercentage > 40) {
+      if (scrollPercentage > 90) {
         setShowPopup(true);
         setHasShownPopup(true);
       }

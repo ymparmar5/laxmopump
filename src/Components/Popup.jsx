@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X, Building2, Mail, Phone, FileText, User } from 'lucide-react';
 import '../Style/Popup.css';
 
-const Popup = ({ isVisible, onClose }) => {
+const Popup = ({ isVisible, onClose, product }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -66,18 +66,22 @@ const Popup = ({ isVisible, onClose }) => {
 
     setIsSubmitting(true);
 
-    // Prepare WhatsApp message
-    const message = `Delearship Inquiry:
-Name: ${formData.name}
-Email: ${formData.email}
-Phone: ${formData.phone}
-Company: ${formData.companyName}`;
+    const isProductInquiry = Boolean(product);
+    const inquiryType = isProductInquiry ? "Product Inquiry" : "Dealership Inquiry";
 
-    // Encode message for URL
-    const encodedMessage = encodeURIComponent(message);
+    // Prepare WhatsApp message
+     const encodedMessage = [
+    `${inquiryType} :`,
+    isProductInquiry && `Product Name: ${product}`,
+    `Name: ${formData.name}`,
+    `Email: ${formData.email}`,
+    `Phone: ${formData.phone}`,
+    `Company: ${formData.companyName}`,
+  ].filter(Boolean); // removes falsey values
+
 
     // WhatsApp link (you can open this in a new tab or the same window)
-    const whatsappURL = `https://wa.me/919316755501?text=${encodedMessage}`;
+  const whatsappURL = `https://wa.me/919316755501?text=${encodeURIComponent(messageLines.join('\n'))}`;
 
     // Simulate form submission
     setTimeout(() => {
@@ -110,8 +114,11 @@ Company: ${formData.companyName}`;
             <div className="popup-header-info">
               <Building2 className="popup-header-icon" />
               <div>
-                <h2 className="popup-title">Become a Dealer</h2>
-                <p className="popup-subtitle">Join our network today</p>
+                {product ?
+                  <h2 className="popup-title">Product Inquiry</h2> :
+
+                  <h2 className="popup-title">Become a Dealer</h2>
+                }
               </div>
             </div>
 

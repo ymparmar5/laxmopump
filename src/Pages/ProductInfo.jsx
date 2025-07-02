@@ -5,12 +5,15 @@ import { doc, getDoc } from "firebase/firestore";
 import { fireDB } from "../FireBase/FireBaseConfig";
 import Loader from "../Components/Loader";
 import "../Style/ProductInfo.css";
+import Star from "../Components/Star"
+import Popup from "../Components/Popup";
 
 const ProductInfo = () => {
   const { loading, setLoading } = useContext(myContext);
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
 
+  const [isOpen, setIsOpen] = useState(false)
   const { id } = useParams();
 
   // getProductData
@@ -35,6 +38,10 @@ const ProductInfo = () => {
     getProductData();
   }, [id]);
 
+  const handleClosePopup = () => {
+    setIsOpen(false);
+  };
+
   if (loading) {
     return (
       <div className="loader-container">
@@ -45,6 +52,7 @@ const ProductInfo = () => {
 
   return (
     <section className="product-info-section">
+
       <div className="product-info-container">
         {product ? (
           <>
@@ -83,17 +91,23 @@ const ProductInfo = () => {
             </div>
             <div className="right-side">
               <div className="product-description-container">
-                <h2 className="product-title">{product.title}</h2>
+                <h2 className="product-title">{product.title}
+
+                  <Star rating={"3.5"} review={product?.review} />
+
+                </h2>
+
+
                 <div className="product-specification-and-features">
                   <div className="product-description">
                     <h2 className="description-title">Specification:</h2>
                     <ul>
                       {product.specification
                         ? product.specification
-                            .split("\n")
-                            .map((specification, index) => (
-                              <li key={index}>{specification}</li>
-                            ))
+                          .split("\n")
+                          .map((specification, index) => (
+                            <li key={index}>{specification}</li>
+                          ))
                         : "No specifications available"}
                     </ul>
                   </div>
@@ -102,15 +116,19 @@ const ProductInfo = () => {
                     <ul>
                       {product.features
                         ? product.features
-                            .split("\n")
-                            .map((feature, index) => (
-                              <li key={index}>{feature}</li>
-                            ))
+                          .split("\n")
+                          .map((feature, index) => (
+                            <li key={index}>{feature}</li>
+                          ))
                         : "No features available"}
                     </ul>
                   </div>
                 </div>
               </div>
+              <Popup isVisible={isOpen} onClose={handleClosePopup} product={product?.title} />
+
+              <button id="submit-btn" onClick={() => setIsOpen(true)} >Get Quote</button>
+
             </div>
           </>
         ) : (
@@ -124,10 +142,10 @@ const ProductInfo = () => {
             <ul>
               {product.description
                 ? product.description
-                    .split("\n")
-                    .map((description, index) => (
-                      <li key={index}>{description}</li>
-                    ))
+                  .split("\n")
+                  .map((description, index) => (
+                    <li key={index}>{description}</li>
+                  ))
                 : "No description available"}
             </ul>
           </div>

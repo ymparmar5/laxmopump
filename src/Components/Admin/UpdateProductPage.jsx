@@ -25,7 +25,7 @@ const UpdateProductPage = () => {
                     setProduct(docSnap.data());
                 } else {
                     toast.error("No such product!");
-            navigate("/admin");
+                    navigate("/admin");
                 }
             } catch (error) {
                 console.error("Error fetching product: ", error);
@@ -42,9 +42,9 @@ const UpdateProductPage = () => {
                 ...product,
                 time: Timestamp.now(),
                 date: new Date().toLocaleString("en-US", {
-                  month: "short",
-                  day: "2-digit",
-                  year: "numeric",
+                    month: "short",
+                    day: "2-digit",
+                    year: "numeric",
                 }),
             });
             toast.success("Product updated successfully!");
@@ -59,15 +59,15 @@ const UpdateProductPage = () => {
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];
         if (file) {
-          try {
-            const url = await uploadImage(file);
-            setProduct((prevProduct) => ({
-              ...prevProduct,
-              [e.target.name]: url,
-            }));
-          } catch (error) {
-            toast.error('Image upload failed');
-          }
+            try {
+                const url = await uploadImage(file);
+                setProduct((prevProduct) => ({
+                    ...prevProduct,
+                    [e.target.name]: url,
+                }));
+            } catch (error) {
+                toast.error('Image upload failed');
+            }
         }
     };
 
@@ -113,15 +113,49 @@ const UpdateProductPage = () => {
                                     value={product.title}
                                     onChange={(e) => setProduct({ ...product, title: e.target.value })}
                                 />
-                                 <div>
-                                 <select onChange={(e) => setProduct({ ...product, bestSell: e.target.value })} value={product.bestSell}>
-        <option value="">Best Selling?</option>
-        <option value="true">Yes</option>
-        <option value="false">No</option>
-    </select>
-                            </div>
+                               
                             </div>
                         </div>
+                         <div className="add-product-form-row">
+
+                        <div className="add-product-form-group">
+                            <div>
+                                <input
+                                    type="number"
+                                    placeholder="review"
+                                    value={product.review}
+                                    onChange={(e) => setProduct({ ...product, review: e.target.value })}
+                                />
+
+
+                            </div>
+                            <div>
+                                <input
+                                    type="number"
+                                    placeholder="star"
+                                    value={product.star}
+                                    onChange={(e) => { 
+                                        if (e.target.value <= 5) 
+                                        setProduct({ ...product, star: e.target.value })
+                                     }}
+                                />
+
+
+                            </div>
+
+                            <div>
+                                <select onChange={(e) => setProduct({ ...product, bestSell: e.target.value })} value={product.bestSell}>
+                                    <option value="">Best Selling?</option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
                         <div className="add-product-form-row">
                             <div className="add-product-form-group">
                                 <input
