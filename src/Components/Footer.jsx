@@ -38,7 +38,7 @@ const Footer = () => {
 
           </div>
 
-        {/* <button id="get-connect" onClick={handleDownload}>View Certificates</button> */}
+        <button id="get-connect" onClick={handleDownload}>View Certificates</button>
 
       </div>
       <footer>
