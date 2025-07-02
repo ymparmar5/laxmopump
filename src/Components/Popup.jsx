@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { X, Building2, Mail, Phone, FileText, User } from 'lucide-react';
 import '../Style/Popup.css';
+import toast from 'react-hot-toast';
 
 const Popup = ({ isVisible, onClose, product }) => {
   const [formData, setFormData] = useState({
@@ -31,7 +32,6 @@ const Popup = ({ isVisible, onClose, product }) => {
     } else if (!/^\+?[\d\s-()]{10,}$/.test(formData.phone)) {
       newErrors.phone = 'Phone number is invalid';
     }
-
 
     if (!formData.companyName.trim()) {
       newErrors.companyName = 'Company name is required';
@@ -69,19 +69,18 @@ const Popup = ({ isVisible, onClose, product }) => {
     const isProductInquiry = Boolean(product);
     const inquiryType = isProductInquiry ? "Product Inquiry" : "Dealership Inquiry";
 
-    // Prepare WhatsApp message
-     const encodedMessage = [
-    `${inquiryType} :`,
-    isProductInquiry && `Product Name: ${product}`,
-    `Name: ${formData.name}`,
-    `Email: ${formData.email}`,
-    `Phone: ${formData.phone}`,
-    `Company: ${formData.companyName}`,
-  ].filter(Boolean); // removes falsey values
+    // Prepare WhatsApp message - Fixed variable name
+    const messageLines = [
+      `${inquiryType} :`,
+      isProductInquiry && `Product Name: ${product}`,
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone}`,
+      `Company: ${formData.companyName}`,
+    ].filter(Boolean); // removes falsey values
 
-
-    // WhatsApp link (you can open this in a new tab or the same window)
-  const whatsappURL = `https://wa.me/919316755501?text=${encodeURIComponent(messageLines.join('\n'))}`;
+    // WhatsApp link
+    const whatsappURL = `https://wa.me/919316755501?text=${encodeURIComponent(messageLines.join('\n'))}`;
 
     // Simulate form submission
     setTimeout(() => {
@@ -90,13 +89,13 @@ const Popup = ({ isVisible, onClose, product }) => {
       // Open WhatsApp with pre-filled message
       window.open(whatsappURL, '_blank'); // open in new tab
 
-      alert('Thank you for your interest! We will contact you soon.');
       onClose();
       setIsSubmitting(false);
       setFormData({
         name: '',
         email: '',
         phone: '',
+        gstNumber: '',
         companyName: ''
       });
     }, 1500);
@@ -116,7 +115,6 @@ const Popup = ({ isVisible, onClose, product }) => {
               <div>
                 {product ?
                   <h2 className="popup-title">Product Inquiry</h2> :
-
                   <h2 className="popup-title">Become a Dealer</h2>
                 }
               </div>
@@ -197,8 +195,6 @@ const Popup = ({ isVisible, onClose, product }) => {
             />
             {errors.companyName && <div className="form-error">{errors.companyName}</div>}
           </div>
-
-
 
           {/* Submit Button */}
           <button
