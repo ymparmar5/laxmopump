@@ -15,28 +15,28 @@ const Popup = ({ isVisible, onClose }) => {
 
   const validateForm = () => {
     const newErrors = {};
-    
+
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
     }
-    
+
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = 'Email is invalid';
     }
-    
+
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
     } else if (!/^\+?[\d\s-()]{10,}$/.test(formData.phone)) {
       newErrors.phone = 'Phone number is invalid';
     }
-    
- 
+
+
     if (!formData.companyName.trim()) {
       newErrors.companyName = 'Company name is required';
     }
-    
+
     return newErrors;
   };
 
@@ -46,7 +46,7 @@ const Popup = ({ isVisible, onClose }) => {
       ...prev,
       [name]: value
     }));
-    
+
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
@@ -57,46 +57,46 @@ const Popup = ({ isVisible, onClose }) => {
   };
 
   const handleSubmit = async () => {
-  const formErrors = validateForm();
+    const formErrors = validateForm();
 
-  if (Object.keys(formErrors).length > 0) {
-    setErrors(formErrors);
-    return;
-  }
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
 
-  setIsSubmitting(true);
+    setIsSubmitting(true);
 
-  // Prepare WhatsApp message
-  const message = `New Inquiry:
+    // Prepare WhatsApp message
+    const message = `Delearship Inquiry:
 Name: ${formData.name}
 Email: ${formData.email}
 Phone: ${formData.phone}
 Company: ${formData.companyName}`;
 
-  // Encode message for URL
-  const encodedMessage = encodeURIComponent(message);
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
 
-  // WhatsApp link (you can open this in a new tab or the same window)
-  const whatsappURL = `https://wa.me/919316755501?text=${encodedMessage}`;
+    // WhatsApp link (you can open this in a new tab or the same window)
+    const whatsappURL = `https://wa.me/919316755501?text=${encodedMessage}`;
 
-  // Simulate form submission
-  setTimeout(() => {
-    console.log('Form submitted:', formData);
+    // Simulate form submission
+    setTimeout(() => {
+      console.log('Form submitted:', formData);
 
-    // Open WhatsApp with pre-filled message
-    window.open(whatsappURL, '_blank'); // open in new tab
+      // Open WhatsApp with pre-filled message
+      window.open(whatsappURL, '_blank'); // open in new tab
 
-    alert('Thank you for your interest! We will contact you soon.');
-    onClose();
-    setIsSubmitting(false);
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      companyName: ''
-    });
-  }, 1500);
-};
+      alert('Thank you for your interest! We will contact you soon.');
+      onClose();
+      setIsSubmitting(false);
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        companyName: ''
+      });
+    }, 1500);
+  };
 
   if (!isVisible) return null;
 
@@ -114,7 +114,7 @@ Company: ${formData.companyName}`;
                 <p className="popup-subtitle">Join our network today</p>
               </div>
             </div>
-            
+
             <button onClick={onClose} className="popup-close-btn">
               <X size={20} />
             </button>

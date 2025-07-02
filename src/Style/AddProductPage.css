@@ -135,3 +135,22 @@
     padding: 10px;
     border: 1px solid #cbd5e0;
 }
+
+.preview-img {
+  width: 60px;
+  height: auto;
+  margin-top: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.preview-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.preview-gallery {
+  margin-top: 16px;
+}

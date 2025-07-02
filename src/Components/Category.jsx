@@ -52,7 +52,7 @@ const Category = () => {
             formData.append("file", file);
             formData.append("upload_preset", "category"); // Replace with your Cloudinary upload preset
 
-            const response = await fetch("https://api.cloudinary.com/v1_1/dn5vvxkra/image/upload", {
+            const response = await fetch("https://api.cloudinary.com/v1_1/laxmopump/image/upload", {
                 method: "POST",
                 body: formData,
             });
