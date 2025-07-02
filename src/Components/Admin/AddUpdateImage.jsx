@@ -102,53 +102,7 @@ const AddUpdateImage = () => {
                     </div>
                 </div>
             </div>
-            <div className="add-product-form-wrapper">
-                <div className="add-product-form-header">
-                    <h2>Add Contact page Images</h2>
-                </div>
-                <div className="add-product-form">
-                    <div className="add-product-form-row">
-                        <div className="add-product-form-group">
-                            <input
-                                type="file"
-                                name="imgurl1"
-                                onChange={handleImageUpload}
-                            />
-                        </div>
-                        <div className="add-product-form-group">
-                            <input
-                                type="file"
-                                name="imgurl2"
-                                onChange={handleImageUpload}
-                            />
-                        </div>
-                        <div className="add-product-form-group">
-                            <input
-                                type="file"
-                                name="imgurl3"
-                                onChange={handleImageUpload}
-                            />
-                        </div>
-                        <div className="add-product-form-group">
-                            <input
-                                type="file"
-                                name="imgurl4"
-                                onChange={handleImageUpload}
-                            />
-                        </div>
-                        <div className="add-product-form-group">
-                            <input
-                                type="file"
-                                name="imgurl5"
-                                onChange={handleImageUpload}
-                            />
-                        </div>
-                        <button className="add-product-add-btn" onClick={saveImages}>
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
+          
             <div className="add-product-form-wrapper">
                 <div className="add-product-form-header">
                     <h2>Add About page Images</h2>
