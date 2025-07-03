@@ -1,7 +1,7 @@
 // src/utils/cloudinary.js
 import { Cloudinary } from 'cloudinary-core';
 
-const cloudinaryCore = new Cloudinary({ cloud_name: 'laxmopump' });
+const cloudinaryCore = new Cloudinary({ cloud_name: 'dn5vvxkra' });
 
 export const uploadImage = async (file) => {
   const formData = new FormData();
