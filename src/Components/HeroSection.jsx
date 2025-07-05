@@ -18,6 +18,9 @@ const HeroSection = () => {
         if (data.type === "home") home.push(data);
       });
 
+      console.log("Fetched document:", home);
+
+
       // Sort newest first
       home.sort((a, b) => b.time?.seconds - a.time?.seconds);
 
