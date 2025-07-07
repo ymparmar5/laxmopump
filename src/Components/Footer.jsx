@@ -1,4 +1,4 @@
-import { Link ,useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../Style/Footer.css"
 import Certificates from "../Pages/Certificates";
 
@@ -15,28 +15,29 @@ const Footer = () => {
   return (
     <>
       <div className="footer-top" >
-     <a href="/catlog-loxmo.pdf" download="catlog-loxmo">
-  <i className="fa-solid fa-file-pdf fa-2xl red-icon"></i>
-</a>
+        <a href="/catlog-loxmo.pdf" download="catlog-loxmo">
+          <i className="fa-solid fa-file-pdf fa-xl red-icon"></i>
+        </a>
 
 
 
-          <a href="https://wa.me/919316755501">
-            <img src="/whatsapp.png" alt="whatsapp" className="whatsapp" />
-          </a>
+        <a href="https://wa.me/919316755501">
+          <img src="/whatsapp.png" alt="whatsapp" className="whatsapp" />
+        </a>
 
         <div id="footer-icons">
-            <a  href="https://www.t.me/AardipJogani " target="_blank" > <img src="./telegram.png" className="footer-icons "></img></a>
-            <a  href="mailto:laxmoindustries@gmail.com" target="_blank" > <img src="./email.png"  className="footer-icons "  ></img></a>
-            <a  href="https://www.instagram.com/laxmo_technology/" target="_blank" > <img src="./instagram.png"  className="footer-icons "></img></a>
-            <a  href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9" target="_blank" > <img src="./map.png"  className="footer-icons  "></img></a>
-            <a  href="https://www.facebook.com/people/Laxmo-Pump/pfbid02vTXqfRy7wGahrG7BFBnA2oP9mh13WPT8Evduj5SycwExH1HkotKJMwYGSKrnnHAZl/" target="_blank" > <img src="./facebook.png" className="footer-icons "></img> </a>
-            <a  href="https://www.linkedin.com/in/laxmo-pumps-water-pump-791492205/" target="_blank" > <img src="./linkedin.png" className="footer-icons "></img> </a>
-            <a  href="https://wa.me/919316755501" target="_blank" > <img src="./whatsapp.png"  className="footer-icons "></img> </a>
-            <a  href="https://www.youtube.com/@laxmopumps9657" target="_blank" > <img src="./youtube.png"  className="footer-icons "></img> </a>
-            <a  href="https://linktr.ee/f5yr6tf?utm_source=linktree_admin_share" target="_blank" > <img src="./qr-code.png"  className="footer-icons "></img> </a>
+          <a href="mailto:laxmoindustries@gmail.com?subject=Inquiry&body=Hello%20Laxmo%20Industries,">
+            <img src="./email.png" className="footer-icons" alt="Email Icon" />
+          </a>
 
-          </div>
+
+          <a href="https://www.instagram.com/laxmopump/?igsh=MTYwOWFvMzBhYmsxZg%3D%3D&utm_source=qr#" target="_blank" > <img src="./instagram.png" className="footer-icons "></img></a>
+          <a href="https://g.co/kgs/y5b7mdL" target="_blank" > <img src="./map.png" className="footer-icons  "></img></a>
+          <a href="https://www.facebook.com/kisan.sales.2025?mibextid=wwXIfr&rdid=MVLIrw9Ag3jLOF35&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18yaPK4PuW%2F%3Fmibextid%3DwwXIfr#" target="_blank" > <img src="./facebook.png" className="footer-icons "></img> </a>
+          <a href="https://wa.me/919316755501" target="_blank" > <img src="./whatsapp.png" className="footer-icons "></img> </a>
+          <a href="https://www.youtube.com/@laxmoindustriespvtltd" target="_blank" > <img src="./youtube.png" className="footer-icons "></img> </a>
+
+        </div>
 
         <button id="get-connect" onClick={handleDownload}>View Certificates</button>
 
@@ -78,7 +79,7 @@ const Footer = () => {
           </h3>
 
           <ul>
-          <Link to={"./sign-up"} >
+            <Link to={"./sign-up"} >
               <li>Sign Up</li>
             </Link>
             <Link to={"./sign-in"} >
@@ -95,7 +96,7 @@ const Footer = () => {
               <li>My account</li>
             </Link>
           </ul></div>
-      
+
       </footer>
       <div id="madeby" >
         <p>&copy; copyright @2024 laxmopumps. all right reserved</p>

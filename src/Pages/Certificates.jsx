@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../Style/imageScroll.css"; // Import the CSS file
 
 const images = [
-  "/certificate1.jpg","/certificate2.jpg","/certificate3.jpg","/certificate4.jpg","/certificate5.jpg","/certificate6.jpg","/certificate7.jpg",
+  "/certificate1.jpg","/certificate2.jpg",
 ];
 
 export default function Certificates() {

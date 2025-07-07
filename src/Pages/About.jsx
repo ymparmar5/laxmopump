@@ -37,7 +37,7 @@ const About = () => {
     <>
       <p id='about-top'></p>
       <h3 className='about-title'>
-        Laxmo Technology is Gujrat base manufacturer and supplier every type of pumps-motor & powertools for various purpose..
+        Laxmo Industries is Gujrat base manufacturer and supplier every type of pumps-motor & powertools for various purpose..
       </h3>
       <div id="about-main">
 

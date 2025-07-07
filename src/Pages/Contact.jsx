@@ -14,25 +14,23 @@ const Contact = () => {
           <a href="mailto:laxmoindustries@gmail.com">
             <b>Email:</b> &nbsp; laxmoindustries@gmail.com <br /><br />
           </a>
-          <a href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9">
+          <a href="https://g.co/kgs/y5b7mdL">
             <b>Address:</b> &nbsp; Kevadiya Farm,<br />
 
           </a>
-          <a href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9">
+          <a href="https://g.co/kgs/y5b7mdL">
             Nr. Sahaj Imperia, Dabholi,
           </a>
 
-          <a href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9">Surat, 395004, Gujarat, India</a>
+          <a href="https://g.co/kgs/y5b7mdL">Surat, 395004, Gujarat, India</a>
 
           <div id="contact-icons">
-            <a href="https://www.t.me/AardipJogani " target="_blank" > <img src="./telegram.png" className="contact-icons"></img></a>
             <a href="mailto:laxmoindustries@gmail.com" target="_blank" > <img src="./email.png" className="contact-icons"  ></img></a>
-            <a href="https://www.instagram.com/laxmo_technology/" target="_blank" > <img src="./instagram.png" className="contact-icons "></img></a>
-            <a href="https://maps.app.goo.gl/W6GD7AsVySMLcJbK9" target="_blank" > <img src="./map.png" className="contact-icons  "></img></a>
-            <a href="https://www.facebook.com/people/Laxmo-Pump/pfbid02vTXqfRy7wGahrG7BFBnA2oP9mh13WPT8Evduj5SycwExH1HkotKJMwYGSKrnnHAZl/" target="_blank" > <img src="./facebook.png" className="contact-icons "></img> </a>
-            <a href="https://www.linkedin.com/in/laxmo-pumps-water-pump-791492205/" target="_blank" > <img src="./linkedin.png" className="contact-icons "></img> </a>
-            <a href="https://wa.me/919316755501" target="_blank" > <img src="./whatsapp.png" className="contact-icons "></img> </a>
-            <a href="https://www.youtube.com/@laxmopumps9657" target="_blank" > <img src="./youtube.png" className="contact-icons "></img> </a>
+            <a href="https://www.instagram.com/laxmopump/?igsh=MTYwOWFvMzBhYmsxZg%3D%3D&utm_source=qr#" target="_blank" > <img src="./instagram.png" className="contact-icons "></img></a>
+            <a href="https://g.co/kgs/y5b7mdL" target="_blank" > <img src="./map.png" className="contact-icons  "></img></a>
+            <a href="https://www.facebook.com/kisan.sales.2025?mibextid=wwXIfr&rdid=MVLIrw9Ag3jLOF35&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18yaPK4PuW%2F%3Fmibextid%3DwwXIfr#" target="_blank" > <img src="./facebook.png" className="contact-icons "></img> </a>
+             <a href="https://wa.me/919316755501" target="_blank" > <img src="./whatsapp.png" className="contact-icons "></img> </a>
+            <a href="https://www.youtube.com/@laxmoindustriespvtltd" target="_blank" > <img src="./youtube.png" className="contact-icons "></img> </a>
           </div>
 
         </div>

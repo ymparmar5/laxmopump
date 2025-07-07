@@ -50,9 +50,9 @@ footer > * {
   bottom: 1rem; /* Adjust as needed */
   left: 0.5rem; /* Adjust as needed */
   background-color: white; /* Button background color */
-  color: var(--color1); /* Button text color */
-  padding: 21px 12px; /* Button padding */
-  border: 1px solid var(--color1); /* Remove button border */
+  color: red; /* Button text color */
+  padding: 21px 11px; /* Button padding */
+  border: 1px solid red; /* Remove button border */
   border-radius: 50rem; /* Button border radius */
   cursor: pointer; /* Change cursor to pointer on hover */
   z-index: 1000; /* Ensure button is above other content */
