@@ -16,6 +16,7 @@ const Shop = () => {
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
     const productsPerPage = 12;
     const [openAccordion, setOpenAccordion] = useState(null);
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= 800);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
@@ -24,6 +25,12 @@ const Shop = () => {
             setSelectedCategory(category);
         }
     }, [location.search]);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth <= 800);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
 
     const handleSort = (e) => {
         setSortOption(e.target.value);
@@ -74,39 +81,41 @@ const Shop = () => {
 
     return (
         <div className="shop-main-content">
-            <div className="shop-sidebar">
-                <h2>Categories</h2>
-                <ul className="category-list">
-                    {Object.keys(categories).map((categoryName, index) => (
-                        <li key={index} className="accordion-item">
-                            <div
-                                className={`category-item ${selectedCategory === categoryName ? 'selected' : ''}`}
-                                onClick={() => handleAccordionClick(categoryName)}
-                                style={{ cursor: 'pointer' }}
-                            >
-                                {categoryName}
-                                <span style={{ float: 'right', fontWeight: 'bold' }}>
-                                    {openAccordion === categoryName ? '-' : '+'}
-                                </span>
-                            </div>
-                            {openAccordion === categoryName && categories[categoryName].length > 0 && (
-                                <ul className="subcategory-list accordion-content">
-                                    {categories[categoryName].map((subcategory, subIndex) => (
-                                        <li
-                                            key={subIndex}
-                                            className={`subcategory-item${selectedSubcategory === subcategory ? ' selected' : ''}`}
-                                            onClick={() => handleSubcategoryClick(subcategory)}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                                            {subcategory}
-                                        </li>
-                                    ))}
-                                </ul>
-                            )}
-                        </li>
-                    ))}
-                </ul>
-            </div>
+            {!isMobile && (
+                <div className="shop-sidebar">
+                    <h2>Categories</h2>
+                    <ul className="category-list">
+                        {Object.keys(categories).map((categoryName, index) => (
+                            <li key={index} className="accordion-item">
+                                <div
+                                    className={`category-item ${selectedCategory === categoryName ? 'selected' : ''}`}
+                                    onClick={() => handleAccordionClick(categoryName)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    {categoryName}
+                                    <span style={{ float: 'right', fontWeight: 'bold' }}>
+                                        {openAccordion === categoryName ? '-' : '+'}
+                                    </span>
+                                </div>
+                                {openAccordion === categoryName && categories[categoryName].length > 0 && (
+                                    <ul className="subcategory-list accordion-content">
+                                        {categories[categoryName].map((subcategory, subIndex) => (
+                                            <li
+                                                key={subIndex}
+                                                className={`subcategory-item${selectedSubcategory === subcategory ? ' selected' : ''}`}
+                                                onClick={() => handleSubcategoryClick(subcategory)}
+                                                style={{ cursor: 'pointer' }}
+                                            >
+                                                {subcategory}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
             <div className="shop-products">
                 <div className="shop-top">
                     <div className="shop-header">
@@ -127,21 +136,72 @@ const Shop = () => {
                         {loading ? (
                             <p>Loading...</p>
                         ) : (
-                            currentProducts.map((item, index) => (
-                                <div key={index} className="shop-card">
-                                    <div className="shop-card-content" onClick={() => navigate(`/productinfo/${item.id}`)}>
-                                        <img src={item.imgurl1} alt={item.title} className="shop-product-image" />
-                                        <div className="shop-product-details">
-                                            <h1 className="shop-product-title">{item.title.substring(0, 25)}</h1>
-                                            <div className="shop-button-container">
-                                                {/* Add buttons or additional details here */}
+                            currentProducts.map((item, index) => {
+                                // Find first non-empty category
+                                const category = item.category1 || item.category2 || item.category3 || item.category4 || '';
+                                // Use rating/reviewCount if available, else placeholder
+                                const rating = item.rating || '4.5';
+                                const reviewCount = item.reviewCount || '23';
+                                return (
+                                    <div key={index} className="shop-card">
+                                        <div className="shop-card-content" onClick={() => navigate(`/productinfo/${item.id}`)}>
+                                            <div className="shop-card-overlay">
+                                                <div className="shop-overlay-content">
+                                                    <div className="shop-overlay-title">{item.title}</div>
+                                                    <div className="shop-overlay-review">
+                                                        <span className="shop-overlay-star">★</span> {rating} ({reviewCount})
+                                                    </div>
+                                                    <div className="shop-overlay-category">{category}</div>
+                                                </div>
+                                            </div>
+                                            <img src={item.imgurl1} alt={item.title} className="shop-product-image" />
+                                            <div className="shop-product-details">
+                                                <h1 className="shop-product-title">{item.title.substring(0, 25)}</h1>
+                                                <div className="shop-button-container">
+                                                    {/* Add buttons or additional details here */}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))
+                                );
+                            })
                         )}
                     </div>
+                    {isMobile && (
+                        <div className="shop-mobile-categories">
+                            <h2>Categories</h2>
+                            <ul className="category-list">
+                                {Object.keys(categories).map((categoryName, index) => (
+                                    <li key={index} className="accordion-item">
+                                        <div
+                                            className={`category-item ${selectedCategory === categoryName ? 'selected' : ''}`}
+                                            onClick={() => handleAccordionClick(categoryName)}
+                                            style={{ cursor: 'pointer' }}
+                                        >
+                                            {categoryName}
+                                            <span style={{ float: 'right', fontWeight: 'bold' }}>
+                                                {openAccordion === categoryName ? '-' : '+'}
+                                            </span>
+                                        </div>
+                                        {openAccordion === categoryName && categories[categoryName].length > 0 && (
+                                            <ul className="subcategory-list accordion-content">
+                                                {categories[categoryName].map((subcategory, subIndex) => (
+                                                    <li
+                                                        key={subIndex}
+                                                        className={`subcategory-item${selectedSubcategory === subcategory ? ' selected' : ''}`}
+                                                        onClick={() => handleSubcategoryClick(subcategory)}
+                                                        style={{ cursor: 'pointer' }}
+                                                    >
+                                                        {subcategory}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        )}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
                     <div className="shop-pagination">
                         {Array.from({ length: totalPages }, (_, index) => (
                             <button key={index} onClick={() => paginate(index + 1)}>
