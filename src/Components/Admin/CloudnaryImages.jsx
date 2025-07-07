@@ -6,7 +6,7 @@ const cloudinaryCore = new Cloudinary({ cloud_name: 'dn5vvxkra' });
 export const uploadImage = async (file) => {
   const formData = new FormData();
   formData.append('file', file);
-  formData.append('upload_preset', 'images'); // Replace with your upload preset
+  formData.append('upload_preset', 'Images'); // Use correct case
  
   try {
     const response = await fetch(
@@ -17,6 +17,7 @@ export const uploadImage = async (file) => {
       }
     );
     const data = await response.json();
+    console.log("Cloudinary upload response:", data);
 
     if (data.secure_url) {
       // const transformedUrl = cloudinaryCore.url(data.public_id, {
@@ -28,7 +29,7 @@ export const uploadImage = async (file) => {
       // });
       return data.secure_url;
     } else {
-      throw new Error('Failed to upload image');
+      throw new Error('Failed to upload image: ' + (data.error?.message || JSON.stringify(data)));
     }
   } catch (error) {
     console.error('Error uploading image to Cloudinary:', error);

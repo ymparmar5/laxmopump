@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Style/Category.css";
-import { collection, doc, setDoc, getDocs } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, updateDoc } from "firebase/firestore";
 import { fireDB } from "../FireBase/FireBaseConfig";
 import { getAuth } from "firebase/auth";
+import { uploadToCloudinary } from "./Admin/CloudnaryCategory"; // adjust path as needed
 
 const Category = () => {
     const [category, setCategory] = useState([]);
@@ -27,8 +28,9 @@ const Category = () => {
             const categoryList = querySnapshot.docs.map((doc) => ({
                 id: doc.id,
                 ...doc.data(),
-            }));
-            setCategory(categoryList);
+            }));       setCategory(categoryList);
+            // Log all image URLs after fetching
+            console.log("Fetched category images:", categoryList.map(cat => cat.image));
         } catch (error) {
             console.error("Error fetching categories:", error);
         }
@@ -48,28 +50,17 @@ const Category = () => {
         }
 
         try {
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "category"); // Replace with your Cloudinary upload preset
-
-            const response = await fetch("https://api.cloudinary.com/v1_1/laxmopump/image/upload", {
-                method: "POST",
-                body: formData,
-            });
-
-            const data = await response.json();
-            if (!data.secure_url) throw new Error("Cloudinary upload failed");
-            console.log("Cloudinary Image URL:", data.secure_url);
+            const imageUrl = await uploadToCloudinary(file);
 
             // Update Firestore with Cloudinary Image URL
             const categoryRef = doc(fireDB, "categories", category[index].id);
-            await setDoc(categoryRef, { ...category[index], image: data.secure_url });
+            await updateDoc(categoryRef, { image: imageUrl });
 
             // Refresh categories
             fetchCategories();
-            console.log("Image uploaded & URL stored in Firestore successfully.");
+            alert("Image uploaded & URL updated in Firestore successfully.");
         } catch (error) {
-            console.error("Image upload failed", error);
+            alert("Image upload failed: " + error.message);
         }
     };
 
@@ -84,8 +75,10 @@ const Category = () => {
             </div>
             <div className="home-category" ref={containerRef}>
                 {category.map((item, index) => (
-                    <div>
-                        <div key={item.id} className="category-container">
+                    <div key={item.id + "-container"}>
+                        {/* Log each image in render for extra visibility */}
+                        {console.log("Rendering image:", item.image)}
+                        <div className="category-container">
                             <div onClick={() => handleCategoryClick(item.name)}>
                                 <div className="category-imgs">
                                     <img src={item.image} alt={item.name} />

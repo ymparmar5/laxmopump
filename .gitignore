@@ -12,6 +12,8 @@ dist
 dist-ssr
 *.local 
 
+
+
 appConfig.json
 backup.json
 
@@ -26,3 +28,4 @@ backup.json
 *.njsproj
 *.sln
 *.sw?
+*.zip
