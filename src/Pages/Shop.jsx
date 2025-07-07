@@ -15,6 +15,7 @@ const Shop = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
     const productsPerPage = 12;
+    const [openAccordion, setOpenAccordion] = useState(null);
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
@@ -29,8 +30,9 @@ const Shop = () => {
     };
 
     
-    const handleCategoryClick = (category) => {
-        setSelectedCategory(category);
+    const handleAccordionClick = (categoryName) => {
+        setOpenAccordion(openAccordion === categoryName ? null : categoryName);
+        setSelectedCategory(categoryName);
         setSelectedSubcategory('');
     };
 
@@ -76,14 +78,26 @@ const Shop = () => {
                 <h2>Categories</h2>
                 <ul className="category-list">
                     {Object.keys(categories).map((categoryName, index) => (
-                        <li key={index}>
-                            <div className={`category-item ${selectedCategory === categoryName ? 'selected' : ''}`} onClick={() => handleCategoryClick(categoryName)}>
+                        <li key={index} className="accordion-item">
+                            <div
+                                className={`category-item ${selectedCategory === categoryName ? 'selected' : ''}`}
+                                onClick={() => handleAccordionClick(categoryName)}
+                                style={{ cursor: 'pointer' }}
+                            >
                                 {categoryName}
+                                <span style={{ float: 'right', fontWeight: 'bold' }}>
+                                    {openAccordion === categoryName ? '-' : '+'}
+                                </span>
                             </div>
-                            {categories[categoryName].length > 0 && (
-                                <ul className="subcategory-list">
+                            {openAccordion === categoryName && categories[categoryName].length > 0 && (
+                                <ul className="subcategory-list accordion-content">
                                     {categories[categoryName].map((subcategory, subIndex) => (
-                                        <li key={subIndex} className="subcategory-item" onClick={() => handleSubcategoryClick(subcategory)}>
+                                        <li
+                                            key={subIndex}
+                                            className={`subcategory-item${selectedSubcategory === subcategory ? ' selected' : ''}`}
+                                            onClick={() => handleSubcategoryClick(subcategory)}
+                                            style={{ cursor: 'pointer' }}
+                                        >
                                             {subcategory}
                                         </li>
                                     ))}
