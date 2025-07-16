@@ -144,17 +144,22 @@ const Shop = () => {
                                 const reviewCount = item.reviewCount || '23';
                                 return (
                                     <div key={index} className="shop-card">
-                                        <div className="shop-card-content" onClick={() => navigate(`/productinfo/${item.id}`)}>
-                                            <div className="shop-card-overlay">
-                                                <div className="shop-overlay-content">
-                                                    <div className="shop-overlay-title">{item.title}</div>
-                                                    <div className="shop-overlay-review">
-                                                        <span className="shop-overlay-star">★</span> {rating} ({reviewCount})
-                                                    </div>
-                                                    <div className="shop-overlay-category">{category}</div>
+                                        <div
+                                            className="flip-card"
+                                            onClick={() => navigate(`/productinfo/${item.id}`)}
+                                        >
+                                            <div className="flip-card-inner">
+                                                <div className="flip-card-front">
+                                                    <img src={item.imgurl1} alt={item.title} className="shop-product-image" />
+                                                </div>
+                                                <div className="flip-card-back">
+                                                    <img
+                                                        src={item.imgurl2 ? item.imgurl2 : item.imgurl1}
+                                                        alt={item.title}
+                                                        className="shop-product-image"
+                                                    />
                                                 </div>
                                             </div>
-                                            <img src={item.imgurl1} alt={item.title} className="shop-product-image" />
                                             <div className="shop-product-details">
                                                 <h1 className="shop-product-title">{item.title.substring(0, 25)}</h1>
                                                 <div className="shop-button-container">

@@ -6,12 +6,17 @@ import { deleteDoc, doc } from "firebase/firestore";
 import { fireDB } from "../../FireBase/FireBaseConfig";
 import toast from "react-hot-toast";
 import "../../Style/ProductDetail.css";
+import { useState } from "react";
 
 const ProductDetail = () => {
     const context = useContext(myContext);
     const { loading, setLoading, getAllProduct, getAllProductFunction } = context;
 
     const navigate = useNavigate();
+
+    // State for delete confirmation popup
+    const [deleteId, setDeleteId] = useState(null);
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const deleteProduct = async (id) => {
         setLoading(true);
@@ -26,8 +31,48 @@ const ProductDetail = () => {
         }
     }
 
+    const handleDeleteClick = (id) => {
+        setDeleteId(id);
+        setShowConfirm(true);
+    };
+
+    const handleConfirmDelete = () => {
+        if (deleteId) {
+            deleteProduct(deleteId);
+        }
+        setShowConfirm(false);
+        setDeleteId(null);
+    };
+
+    const handleCancelDelete = () => {
+        setShowConfirm(false);
+        setDeleteId(null);
+    };
+
     return (
         <div>
+            {showConfirm && (
+                <div className="popup-overlay delete-confirm-overlay">
+                    <div className="popup-container delete-confirm-container">
+                        {/* Close button */}
+                        <button className="delete-confirm-close" onClick={handleCancelDelete} aria-label="Close">&times;</button>
+                        {/* Warning icon */}
+                        <div className="delete-confirm-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="12" fill="#FFF3CD"/>
+                                <path d="M12 7V13" stroke="#FFA500" strokeWidth="2" strokeLinecap="round"/>
+                                <circle cx="12" cy="16" r="1" fill="#FFA500"/>
+                            </svg>
+                        </div>
+                        <h2 className="delete-confirm-title">Delete Product?</h2>
+                        <p className="delete-confirm-message">This action cannot be undone. Are you sure you want to permanently delete this product?</p>
+                        <div className="delete-confirm-actions">
+                            <button className="delete-confirm-btn delete" onClick={handleConfirmDelete}>Yes, Delete</button>
+                            <button className="delete-confirm-btn cancel" onClick={handleCancelDelete}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
            
             {loading && (
                 <div className="loader-container">
@@ -69,7 +114,7 @@ const ProductDetail = () => {
                                         </button>
                                         <button
                                             className="delete"
-                                            onClick={() => deleteProduct(id)}
+                                            onClick={() => handleDeleteClick(id)}
                                         >
                                             Delete
                                         </button>

@@ -28,7 +28,7 @@ const Contact = () => {
             <a href="mailto:laxmoindustries@gmail.com" target="_blank" > <img src="./email.png" className="contact-icons"  ></img></a>
             <a href="https://www.instagram.com/laxmopump/?igsh=MTYwOWFvMzBhYmsxZg%3D%3D&utm_source=qr#" target="_blank" > <img src="./instagram.png" className="contact-icons "></img></a>
             <a href="https://g.co/kgs/y5b7mdL" target="_blank" > <img src="./map.png" className="contact-icons  "></img></a>
-            <a href="https://www.facebook.com/kisan.sales.2025?mibextid=wwXIfr&rdid=MVLIrw9Ag3jLOF35&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F18yaPK4PuW%2F%3Fmibextid%3DwwXIfr#" target="_blank" > <img src="./facebook.png" className="contact-icons "></img> </a>
+            <a href="https://www.facebook.com/share/16zAZxDAVX/?mibextid=wwXIfr" target="_blank" > <img src="./facebook.png" className="contact-icons "></img> </a>
              <a href="https://wa.me/919316755501" target="_blank" > <img src="./whatsapp.png" className="contact-icons "></img> </a>
             <a href="https://www.youtube.com/@laxmoindustriespvtltd" target="_blank" > <img src="./youtube.png" className="contact-icons "></img> </a>
           </div>
