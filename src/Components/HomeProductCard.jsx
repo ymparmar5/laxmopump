@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import myContext from "../Context/myContext";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
 import "../Style/HomeProductCard.css";
@@ -11,10 +11,32 @@ const HomeProductCard = () => {
     const { loading, getAllProduct } = context;
     const cartItems = useSelector((state) => state.cart);
     const dispatch = useDispatch();
+    const [loadedImages, setLoadedImages] = useState({});
+    const [products, setProducts] = useState(() => {
+        // Load cached products first
+        const cached = localStorage.getItem("homeProducts");
+        return cached ? JSON.parse(cached) : [];
+    });
 
     useEffect(() => {
         localStorage.setItem('cart', JSON.stringify(cartItems));
     }, [cartItems]);
+
+    useEffect(() => {
+        // Cache products for next render
+        if (getAllProduct.length > 0) {
+            const bestProducts = getAllProduct
+                .filter(item => item.bestSell)
+                .slice(0, 8)
+                .map(item => ({
+                    ...item,
+                    optimizedImage: `${item.imgurl1}?f_auto,q_auto:best,w_400,h_400,c_fill`,
+                    placeholder: `${item.imgurl1}?f_auto,q_auto:low,w_20,h_20,c_fill`
+                }));
+            setProducts(bestProducts);
+            localStorage.setItem("homeProducts", JSON.stringify(bestProducts));
+        }
+    }, [getAllProduct]);
 
     return (
         <div className="home-product-card">
@@ -25,14 +47,28 @@ const HomeProductCard = () => {
                 <div className="home-product-container">
                     <div className="home-product-loader-container">{loading && <Loader />}</div>
                     <div className="home-product-grid">
-                        {getAllProduct.filter(item => item.bestSell).slice(0, 8).map((item, index) => {
-                            const { id, title, imgurl1 } = item;
+                        {products.map((item, index) => {
+                            const { id, title, optimizedImage, placeholder } = item;
                             return (
                                 <div key={index} className="home-product-card-item">
                                     <div className="home-product-card-content" onClick={() => navigate(`/productinfo/${id}`)}>
-                                        <img src={imgurl1} alt="product" className="home-product-image" />
+                                        <img
+                                            src={optimizedImage}
+                                            alt="product"
+                                            loading="lazy"
+                                            className="home-product-image"
+                                            style={{
+                                                backgroundImage: `url(${placeholder})`,
+                                                backgroundSize: "cover",
+                                                backgroundPosition: "center",
+                                                filter: loadedImages[index] ? "blur(0px)" : "blur(20px)",
+                                                transition: "filter 0.5s ease-out",
+                                            }}
+                                            onLoad={() =>
+                                                setLoadedImages((prev) => ({ ...prev, [index]: true }))
+                                            }
+                                        />
                                         <div className="home-product-details">
-                                            {/* <h2 className="home-product-brand">Laxmo pumps</h2> */}
                                             <h1 className="home-product-title">{title.substring(0, 25)}</h1>
                                             <div className="home-product-button-container">
                                                 {/* Add any buttons or additional details here if needed */}

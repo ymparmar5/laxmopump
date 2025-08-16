@@ -2,12 +2,32 @@ import React, { useContext } from 'react';
 import ProductDetail from './ProdcutDetail';
 import myContext from '../../Context/myContext';
 import '../../Style/AdminDashboard.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from "firebase/auth";
 
 const AdminDashboard = () => {
     const user = JSON.parse(localStorage.getItem('users'));
     const context = useContext(myContext);
     const { getAllProduct } = context;
+    const navigate = useNavigate();
+    const auth = getAuth();
+
+    // Logout handler
+    const handleLogout = async () => {
+        try {
+            // Firebase sign out
+            await signOut(auth);
+
+            // Clear localStorage
+            localStorage.removeItem('users');
+            localStorage.removeItem('role');
+
+            // Redirect to login page
+            navigate('/sign-in');  // Adjust the route to your login page
+        } catch (error) {
+            console.error("Logout failed:", error);
+        }
+    };
 
     return (
         <div className="dashboard-container">
@@ -24,12 +44,12 @@ const AdminDashboard = () => {
                 <Link to={'/AddUpdateImage'}>
                     <button className="compact-button">Add/Update Images</button>
                 </Link>
-               
+
+                <button className="compact-button" onClick={handleLogout}> Logout </button>
 
             </div>
 
             <div className="product-info">
-
                 <div className="add-product">
                     <ProductDetail />
                 </div>

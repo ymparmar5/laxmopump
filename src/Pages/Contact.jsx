@@ -59,8 +59,10 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <div id="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3808200.7768138624!2d72.843364!3d21.233987!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be04f7c994f768d%3A0x45b3b521ee85ed72!2sLaxmo%20Technology!5e0!3m2!1sen!2sus!4v1719376786736!5m2!1sen!2sus" allowfullscreen="" id="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <div >
+     
+
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3718.096654626436!2d72.9467617!3d21.2676413!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be047df044a45d1%3A0xcabc91354e1cb1c3!2sHydroplus%20International!5e0!3m2!1sen!2sin!4v1754221303088!5m2!1sen!2sin" id="map-iframe"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </>
   );

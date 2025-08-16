@@ -5,8 +5,12 @@ import '../Style/HeroSection.css';
 import toast from 'react-hot-toast';
 
 const HeroSection = () => {
-  const [slides, setSlides] = useState([]);
+  const [slides, setSlides] = useState(() => {
+    const cached = localStorage.getItem("heroSlides");
+    return cached ? JSON.parse(cached) : [];
+  });
   const [slideIndex, setSlideIndex] = useState(0);
+  const [loadedImages, setLoadedImages] = useState({});
 
   const fetchImages = async () => {
     try {
@@ -18,7 +22,6 @@ const HeroSection = () => {
         if (data.type === "home") home.push(data);
       });
 
-      // Sort newest first
       home.sort((a, b) => b.time?.seconds - a.time?.seconds);
 
       if (home.length > 0) {
@@ -27,19 +30,22 @@ const HeroSection = () => {
 
         for (let i = 1; i <= 5; i++) {
           const key = `imgurl${i}`;
+
           if (latest[key]) {
             dynamicSlides.push({
-              src: latest[key],
-              alt: `Slide ${i}`,
-              name: `Slide ${i}`, // or pull from data if available
+              src: `${latest[key]}?f_auto,q_auto:best,w_1920,h_800,c_fill`,
+              placeholder: `${latest[key]}?f_auto,q_auto:low,w_40,h_20,c_fill`,
+              name: `Slide ${i}`,
             });
           }
         }
 
         setSlides(dynamicSlides);
+        localStorage.setItem("heroSlides", JSON.stringify(dynamicSlides));
+
       }
     } catch (error) {
-      toast.error("Failed to fetch hero images");
+
       console.error("Image fetch error:", error);
     }
   };
@@ -69,8 +75,25 @@ const HeroSection = () => {
             className="hero-bannerSlides fade"
             style={{ display: index === slideIndex ? 'block' : 'none' }}
           >
-            <img className="banner" src={slide.src} alt={slide.alt} />
-            {/* Optionally use <h1>{slide.name}</h1> */}
+          
+          
+
+               <img
+              className={`banner ${loadedImages[index] ? "loaded" : "loading"}`}
+              src={slide.src}
+              alt={slide.alt}
+              loading={index === 0 ? "eager" : "lazy"}
+              onLoad={() =>
+                setLoadedImages((prev) => ({ ...prev, [index]: true }))
+              }
+              style={{
+                backgroundImage: `url(${slide.placeholder})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                filter: loadedImages[index] ? "blur(0px)" : "blur(20px)",
+                transition: "filter 0.5s ease-out",
+              }}
+            />
           </div>
         ))}
       </div>

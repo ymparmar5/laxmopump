@@ -21,8 +21,8 @@
 /* Popup Container */
 .popup-container {
   position: relative;
-  width: 100%;
-  max-width: 38rem;
+  width: 10%;
+  max-width: 40rem;
   margin: 0 auto;
   border-radius: 1rem;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);

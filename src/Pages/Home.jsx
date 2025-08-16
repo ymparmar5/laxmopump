@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import HeroSection from '../Components/HeroSection';
 import Category from '../Components/Category';
 import HomeProductCard from '../Components/HomeProductCard';
@@ -6,33 +6,33 @@ import Popup from '../Components/Popup';
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const [hasShownPopup, setHasShownPopup] = useState(false);
+  const hasShownPopup = useRef(false); // useRef prevents re-renders
 
   useEffect(() => {
     const handleScroll = () => {
-      // Only show popup once per session
-      if (hasShownPopup) return;
+      if (hasShownPopup.current) return;
 
-      const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      const scrollPercentage = (scrollPosition + windowHeight) / documentHeight * 100;
-      
-      // Show popup when user scrolls 40% of the page
-      if (scrollPercentage > 90) {
-        setShowPopup(true);
-        setHasShownPopup(true);
-      }
+
+    
     };
 
-    // Add scroll event listener
+    const timer = setTimeout(() => {
+      if (!hasShownPopup.current) {
+        setShowPopup(true);
+        hasShownPopup.current = true;
+      }
+    }, 30000);
+
     window.addEventListener('scroll', handleScroll);
-    
-    // Cleanup function to remove event listener
+
+    // Cleanup
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
     };
-  }, [hasShownPopup]);
+  }, []);
 
   const handleClosePopup = () => {
     setShowPopup(false);
@@ -41,7 +41,7 @@ const Home = () => {
   return (
     <div className="main-content min-h-screen">
       <HeroSection />
-      <Category />
+      <Category />  
       <HomeProductCard />
       <Popup isVisible={showPopup} onClose={handleClosePopup} />
       {/* <HomeAbout /> */}
