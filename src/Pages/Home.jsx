@@ -6,32 +6,21 @@ import Popup from '../Components/Popup';
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const hasShownPopup = useRef(false); // useRef prevents re-renders
+  const hasShownPopup = useRef(
+    localStorage.getItem('hasShownPopup') === 'true'
+  );
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (hasShownPopup.current) return;
+    if (hasShownPopup.current) return;
 
-      const windowHeight = window.innerHeight;
-      const documentHeight = document.documentElement.scrollHeight;
-
-    
-    };
-
+    // Show popup after 30s
     const timer = setTimeout(() => {
-      if (!hasShownPopup.current) {
-        setShowPopup(true);
-        hasShownPopup.current = true;
-      }
+      setShowPopup(true);
+      hasShownPopup.current = true;
+      localStorage.setItem('hasShownPopup', 'true'); // persist
     }, 30000);
 
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      clearTimeout(timer);
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   const handleClosePopup = () => {
@@ -41,11 +30,9 @@ const Home = () => {
   return (
     <div className="main-content min-h-screen">
       <HeroSection />
-      <Category />  
+      <Category />
       <HomeProductCard />
       <Popup isVisible={showPopup} onClose={handleClosePopup} />
-      {/* <HomeAbout /> */}
-      {/* <Testimonial /> */}
     </div>
   );
 };
