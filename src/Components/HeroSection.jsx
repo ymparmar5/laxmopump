@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
 import { fireDB } from '../FireBase/FireBaseConfig';
 import '../Style/HeroSection.css';
-import toast from 'react-hot-toast';
 
 const HeroSection = () => {
   const [slides, setSlides] = useState(() => {
@@ -30,7 +29,6 @@ const HeroSection = () => {
 
         for (let i = 1; i <= 5; i++) {
           const key = `imgurl${i}`;
-
           if (latest[key]) {
             dynamicSlides.push({
               src: `${latest[key]}?f_auto,q_auto:best,w_1920,h_800,c_fill`,
@@ -43,9 +41,14 @@ const HeroSection = () => {
         setSlides(dynamicSlides);
         localStorage.setItem("heroSlides", JSON.stringify(dynamicSlides));
 
+        // Preload high-res images for smooth display
+        dynamicSlides.forEach((slide, index) => {
+          const img = new Image();
+          img.src = slide.src;
+          img.onload = () => setLoadedImages((prev) => ({ ...prev, [index]: true }));
+        });
       }
     } catch (error) {
-
       console.error("Image fetch error:", error);
     }
   };
@@ -64,7 +67,7 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [slides]);
 
-  if (slides.length === 0) return null; // or loading indicator
+  if (slides.length === 0) return null;
 
   return (
     <div id="hero">
@@ -75,21 +78,11 @@ const HeroSection = () => {
             className="hero-bannerSlides fade"
             style={{ display: index === slideIndex ? 'block' : 'none' }}
           >
-          
-          
-
-               <img
+            <img
               className={`banner ${loadedImages[index] ? "loaded" : "loading"}`}
-              src={slide.src}
-              alt={slide.alt}
-              loading={index === 0 ? "eager" : "lazy"}
-              onLoad={() =>
-                setLoadedImages((prev) => ({ ...prev, [index]: true }))
-              }
+              src={loadedImages[index] ? slide.src : slide.placeholder}
+              alt={slide.name}
               style={{
-                backgroundImage: `url(${slide.placeholder})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center",
                 filter: loadedImages[index] ? "blur(0px)" : "blur(20px)",
                 transition: "filter 0.5s ease-out",
               }}
