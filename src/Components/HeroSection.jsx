@@ -73,22 +73,19 @@ const HeroSection = () => {
     <div id="hero">
       <div className="slideshow-container">
         {slides.map((slide, index) => (
-          <div
+          <img
             key={index}
-            className="hero-bannerSlides fade"
-            style={{ display: index === slideIndex ? 'block' : 'none' }}
-          >
-            <img
-              className={`banner ${loadedImages[index] ? "loaded" : "loading"}`}
-              src={loadedImages[index] ? slide.src : slide.placeholder}
-              alt={slide.name}
-              style={{
-                filter: loadedImages[index] ? "blur(0px)" : "blur(20px)",
-                transition: "filter 0.5s ease-out",
-              }}
-            />
-          </div>
+            className={`hero-fade ${index === slideIndex ? "loaded" : ""}`}
+            src={loadedImages[index] ? slide.src : slide.placeholder}
+            alt={slide.name}
+            style={{
+              filter: loadedImages[index] ? "blur(0px)" : "blur(20px)",
+            }}
+          />
         ))}
+
+
+
       </div>
 
       <br />
