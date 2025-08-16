@@ -62,7 +62,7 @@ const HeroSection = () => {
 
     const interval = setInterval(() => {
       setSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 4000);
+    }, 8000);
 
     return () => clearInterval(interval);
   }, [slides]);
