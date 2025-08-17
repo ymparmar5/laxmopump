@@ -104,13 +104,7 @@ const Category = () => {
                     alt={item.name}
                     loading="lazy"
                     onLoad={() => setLoadedImages((prev) => ({ ...prev, [index]: true }))}
-                    style={{
-                      backgroundImage: `url(${item.placeholder})`,
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                      filter: loadedImages[index] ? "blur(0px)" : "blur(20px)",
-                      transition: "filter 0.5s ease-out",
-                    }}
+                    
                   />
                 </div>
                 <h1 className="category-names">{item.name}</h1>

@@ -57,13 +57,7 @@ const HomeProductCard = () => {
                                             alt="product"
                                             loading="lazy"
                                             className="home-product-image"
-                                            style={{
-                                                backgroundImage: `url(${placeholder})`,
-                                                backgroundSize: "cover",
-                                                backgroundPosition: "center",
-                                                filter: loadedImages[index] ? "blur(0px)" : "blur(20px)",
-                                                transition: "filter 0.5s ease-out",
-                                            }}
+                                            
                                             onLoad={() =>
                                                 setLoadedImages((prev) => ({ ...prev, [index]: true }))
                                             }
