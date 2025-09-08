@@ -72,7 +72,7 @@ const TermsAndConditions = () => {
       <p>If you have questions, contact us at:</p>
       <address>
       Laxmo Pump<br />
-        Email:laxmopumponline@gmail.com<br />
+        Email:contact@laxmopumps.com<br />
         Phone:   +91 9316755501<br />
         Address: 104/C Block, Orchid Green,
                     LP Savani Rd, Palanpur,

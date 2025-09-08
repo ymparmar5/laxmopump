@@ -11,8 +11,8 @@ const Contact = () => {
           <a href="tel:9316755501">
             <b  >Phone:</b> &nbsp; +91 9316755501 <br /><br />
           </a>
-          <a href="mailto:laxmoindustries@gmail.com">
-            <b>Email:</b> &nbsp; laxmoindustries@gmail.com <br /><br />
+          <a href="mailto:contact@laxmopumps.com">
+            <b>Email:</b> &nbsp; contact@laxmopumps.com <br /><br />
           </a>
           <a href="https://g.co/kgs/y5b7mdL">
             <b>Address:</b> &nbsp; Kevadiya Farm,<br />
@@ -25,7 +25,7 @@ const Contact = () => {
           <a href="https://g.co/kgs/y5b7mdL">Surat, 395004, Gujarat, India</a>
 
           <div id="contact-icons">
-            <a href="mailto:laxmoindustries@gmail.com" target="_blank" > <img src="./email.png" className="contact-icons"  ></img></a>
+            <a href="mailto:contact@laxmopumps.com" target="_blank" > <img src="./email.png" className="contact-icons"  ></img></a>
             <a href="https://www.instagram.com/laxmopump/?igsh=MTYwOWFvMzBhYmsxZg%3D%3D&utm_source=qr#" target="_blank" > <img src="./instagram.png" className="contact-icons "></img></a>
             <a href="https://g.co/kgs/y5b7mdL" target="_blank" > <img src="./map.png" className="contact-icons  "></img></a>
             <a href="https://www.facebook.com/share/16zAZxDAVX/?mibextid=wwXIfr" target="_blank" > <img src="./facebook.png" className="contact-icons "></img> </a>

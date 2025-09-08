@@ -26,7 +26,7 @@ const Footer = () => {
         </a>
 
         <div id="footer-icons">
-          <a href="mailto:laxmoindustries@gmail.com?subject=Inquiry&body=Hello%20Laxmo%20Industries,">
+          <a href="mailto:contact@laxmopumps.com?subject=Inquiry&body=Hello%20Laxmo%20Industries,">
             <img src="./email.png" className="footer-icons" alt="Email Icon" />
           </a>
 
