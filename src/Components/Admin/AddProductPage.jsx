@@ -78,36 +78,40 @@ const AddProductPage = () => {
     };
 
     const handleAddCategory = () => {
-        if (newCategory) {
+        if (newCategory.trim()) {
             addNewCategory(newCategory);
-            toast.success(`Category "${newCategory}" added successfully!`);
             setNewCategory("");
+        } else {
+            toast.error("Please enter a category name.");
         }
     };
 
     const handleDeleteCategory = () => {
-        if (newCategory) {
+        if (newCategory.trim()) {
             deleteCategory(newCategory);
-            toast.success(`Category "${newCategory}" deleted successfully!`);
             setNewCategory("");
+        } else {
+            toast.error("Please enter a category name to delete.");
         }
     };
 
     const handleAddSubcategory = () => {
-        if (selectedCategoryForSub && newSubcategory) {
+        if (selectedCategoryForSub && newSubcategory.trim()) {
             addNewSubcategory(selectedCategoryForSub, newSubcategory);
-            toast.success(`Subcategory "${newSubcategory}" added to "${selectedCategoryForSub}" successfully!`);
             setNewSubcategory("");
             setSelectedCategoryForSub("");
+        } else {
+            toast.error("Please select a category and enter a subcategory name.");
         }
     };
 
     const handleDeleteSubcategory = () => {
-        if (selectedCategoryForSub && newSubcategory) {
+        if (selectedCategoryForSub && newSubcategory.trim()) {
             deleteSubcategory(selectedCategoryForSub, newSubcategory);
-            toast.success(`Subcategory "${newSubcategory}" deleted successfully!`);
             setNewSubcategory("");
             setSelectedCategoryForSub("");
+        } else {
+            toast.error("Please select a category and enter a subcategory name to delete.");
         }
     };
 
@@ -126,9 +130,6 @@ const AddProductPage = () => {
                                 value={product.title}
                                 onChange={(e) => setProduct({ ...product, title: e.target.value })}
                             />
-
-
-
                         </div>
                     </div>
                    
@@ -231,21 +232,34 @@ const AddProductPage = () => {
                             />
                         </div>
                     </div>
-
                 </div>
+
+                {/* ✅ FIXED: Category Management Section with Better UI */}
                 <div className="add-product-add-category-section">
+                    <h3 style={{ marginBottom: '10px', fontSize: '18px' }}>Manage Categories</h3>
                     <input
                         type="text"
-                        placeholder="New Category Name"
+                        placeholder="Enter Category Name"
                         value={newCategory}
                         onChange={(e) => setNewCategory(e.target.value)}
                     />
-                    <button className="add-product-add-btn" onClick={handleAddCategory}>
-                        Add Category
-                    </button>
-
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                        <button className="add-product-add-btn" onClick={handleAddCategory}>
+                            Add Category
+                        </button>
+                        <button 
+                            className="add-product-add-btn" 
+                            onClick={handleDeleteCategory}
+                            style={{ backgroundColor: '#ef4444' }}
+                        >
+                            Delete Category
+                        </button>
+                    </div>
                 </div>
+
+                {/* ✅ FIXED: Subcategory Management Section with Better UI */}
                 <div className="add-product-add-subcategory-section">
+                    <h3 style={{ marginBottom: '10px', fontSize: '18px' }}>Manage Subcategories</h3>
                     <select
                         value={selectedCategoryForSub}
                         onChange={(e) => setSelectedCategoryForSub(e.target.value)}
@@ -259,27 +273,33 @@ const AddProductPage = () => {
                     </select>
                     <input
                         type="text"
-                        placeholder="New Subcategory Name"
+                        placeholder="Enter Subcategory Name"
                         value={newSubcategory}
                         onChange={(e) => setNewSubcategory(e.target.value)}
                     />
-                    <button className="add-product-add-btn" onClick={handleAddSubcategory}>
-                        Add Subcategory
-                    </button>
-
+                    <div style={{ display: 'flex', gap: '10px', marginTop: '10px' }}>
+                        <button className="add-product-add-btn" onClick={handleAddSubcategory}>
+                            Add Subcategory
+                        </button>
+                        <button 
+                            className="add-product-add-btn" 
+                            onClick={handleDeleteSubcategory}
+                            style={{ backgroundColor: '#ef4444' }}
+                        >
+                            Delete Subcategory
+                        </button>
+                    </div>
                 </div>
-                <div className="add-product-add-subcategory-section">
 
+                {/* Add Product Button */}
+                <div className="add-product-add-subcategory-section">
                     <button className="add-product-btn add-product-submit-btn" onClick={addProduct}>
                         Add Product
                     </button>
                 </div>
-
             </div>
-
         </div>
     );
 };
 
 export default AddProductPage;
-
