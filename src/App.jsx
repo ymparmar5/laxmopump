@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
-import Shop from "./Pages/Shop";
+import Products from "./Pages/Products";
 // import CategoryPage from "./Pages/CategoryPage";
 import Error from "./Pages/Error";
 import Header from "./Components/Header";
@@ -39,7 +39,7 @@ const App = () => {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/productinfo/:id" element={<ProductInfo />} />
-          <Route path="/shop" element={<Shop />} />
+          <Route path="/Products" element={<Products />} />
           {/* <Route path="/category/:categoryname" element={<CategoryPage />} />  */}
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<About />} />

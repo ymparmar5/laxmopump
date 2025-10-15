@@ -41,7 +41,7 @@ const HomeProductCard = () => {
     return (
         <div className="home-product-card">
             <div className="home-product-heading">
-                <h1>Bestselling Products</h1>
+                <h1>Products Range</h1>
             </div>
             <section className="home-product-section">
                 <div className="home-product-container">

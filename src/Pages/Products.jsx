@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from "react-router-dom";
 import myContext from '../Context/myContext';
 import { useDispatch, useSelector } from 'react-redux';
-import '../Style/Shop.css';
+import '../Style/Products.css';
 
 const Shop = () => {
     const navigate = useNavigate();

@@ -3,6 +3,7 @@ import HeroSection from '../Components/HeroSection';
 import Category from '../Components/Category';
 import HomeProductCard from '../Components/HomeProductCard';
 import Popup from '../Components/Popup';
+import YouTubeSection from '../Components/Youtube';
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -33,6 +34,7 @@ const Home = () => {
       <Category />
       <HomeProductCard />
       <Popup isVisible={showPopup} onClose={handleClosePopup} />
+      <YouTubeSection />
     </div>
   );
 };

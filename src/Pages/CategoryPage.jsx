@@ -3,7 +3,7 @@
 // import { useContext, useEffect, useState } from "react";
 // import myContext from "../Context/myContext";
 // import { useDispatch, useSelector } from "react-redux";
-// import '../Style/Shop.css';
+// import '../Style/Products.css';
 
 // const CategoryPage = () => {
 //     const { categoryname } = useParams();
