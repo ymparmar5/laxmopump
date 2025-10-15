@@ -50,7 +50,7 @@
   aspect-ratio: 16 / 9;
   position: relative;
   overflow: hidden;
-  border-radius: 0; /* optional */
+  border-radius: 0; 
 }
 
 .video-frame iframe {
@@ -62,7 +62,7 @@
 }
 
 
-/* Description Side */
+
 .description-side {
   flex: 1;
   background: white;
