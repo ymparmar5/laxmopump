@@ -31,9 +31,10 @@
   background: white;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-  min-height: 500px;
+  min-height: 350px; /* decreased ~30% from 500px */
   border-radius: 12px;
 }
+
 
 /* Video Side */
 .video-side {
@@ -68,7 +69,9 @@
   background: white;
   display: flex;
   align-items: center;
-  padding: 60px;
+  padding-inline: 60px;
+  padding-block: 0px;
+
   overflow-y: auto;
 }
 
@@ -85,13 +88,7 @@
   letter-spacing: -0.5px;
 }
 
-.title-underline {
-  width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, #0066cc, #00aaff);
-  margin-bottom: 25px;
-  border-radius: 2px;
-}
+
 
 .intro-text {
   font-size: 1.2rem;
@@ -104,7 +101,7 @@
 .description-text {
   color: #4a5568;
   font-size: 0.95rem;
-  line-height: 1.7;
+  line-height: 1.2;
 }
 
 .description-text p {

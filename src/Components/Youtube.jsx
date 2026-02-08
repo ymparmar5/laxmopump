@@ -15,7 +15,7 @@ const YouTubeSection = () => {
           <div className="description-side">
             <div className="description-content">
               <h2 className="section-title">Discover Laxmo Pumps</h2>
-              <div className="title-underline"></div>
+              
               
               <p className="intro-text">
                 Your Trusted Partner in Premium Pumping Solutions
@@ -30,9 +30,7 @@ const YouTubeSection = () => {
                   Our diverse range spans across multiple categories including Water Pumps, Generators, Air Compressors, Vacuum Cleaners, High Pressure Washers, Pump Controllers, and Welding Machines. Each product undergoes meticulous testing to ensure optimal performance, earning us the trust of leading enterprises across India.
                 </p>
                 
-                <p className="closing-text">
-                  At Laxmo Pumps, we are committed to providing cutting-edge solutions that ensure reliability, innovation, and unmatched quality. Whether you need equipment for domestic use or large-scale industrial operations, we have the perfect solution for you.
-                </p>
+                
               </div>
             </div>
           </div>
