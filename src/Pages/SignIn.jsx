@@ -35,8 +35,7 @@ const SignIN = () => {
         setLoading(true);
         try {
             const users = await signInWithEmailAndPassword(auth, userLogin.email, userLogin.password);
-            // console.log(users.user)
-
+          
             try {
                 const q = query(
                     collection(fireDB, "user"),
@@ -60,11 +59,11 @@ const SignIN = () => {
                 });
                 return () => data;
             } catch (error) {
-                console.log(error);
+               
                 setLoading(false);
             }
         } catch (error) {
-            console.log(error);
+       
             setLoading(false);
             toast.error("Login Failed");
         }

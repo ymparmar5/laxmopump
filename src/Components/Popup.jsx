@@ -84,7 +84,7 @@ const Popup = ({ isVisible, onClose, product }) => {
 
     // Simulate form submission
     setTimeout(() => {
-      console.log('Form submitted:', formData);
+
 
       // Open WhatsApp with pre-filled message
       window.open(whatsappURL, '_blank'); // open in new tab

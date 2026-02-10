@@ -17,7 +17,6 @@ export const uploadImage = async (file) => {
       }
     );
     const data = await response.json();
-    console.log("Cloudinary upload response:", data);
 
     if (data.secure_url) {
       // const transformedUrl = cloudinaryCore.url(data.public_id, {

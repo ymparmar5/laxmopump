@@ -50,7 +50,7 @@ const ProductInfo = () => {
         setProduct({ ...productTemp.data(), id: productTemp.id });
         setMainImage(productTemp.data().imgurl1); // Set main image initially
       } else {
-        console.log("No such Product!");
+       
       }
       setLoading(false);
     } catch (error) {

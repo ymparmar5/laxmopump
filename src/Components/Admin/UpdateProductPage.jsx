@@ -5,7 +5,7 @@ import { fireDB } from "../../FireBase/FireBaseConfig";
 import toast from "react-hot-toast";
 import myContext from '../../Context/myContext';
 import "../../Style/AddProductPage.css";
-import { uploadImage } from '../Admin/Cloudnary'; // Import the Cloudinary upload function
+import { uploadImage } from '../Admin/Cloudnary';
 
 const UpdateProductPage = () => {
     const { id } = useParams();
@@ -49,7 +49,6 @@ const UpdateProductPage = () => {
             });
             toast.success("Product updated successfully!");
             navigate("/admin");
-
         } catch (error) {
             console.error("Error updating product: ", error);
             toast.error("Failed to update product.");
@@ -97,6 +96,10 @@ const UpdateProductPage = () => {
         }
     };
 
+    useEffect(() => {
+        console.log(product, 'hi');
+    }, [product]);
+
     return (
         product && (
             <div className="add-product-container">
@@ -113,85 +116,58 @@ const UpdateProductPage = () => {
                                     value={product.title}
                                     onChange={(e) => setProduct({ ...product, title: e.target.value })}
                                 />
-                               
                             </div>
                         </div>
-                         <div className="add-product-form-row">
-
-                        <div className="add-product-form-group">
-                            <div>
-                                <input
-                                    type="number"
-                                    placeholder="review"
-                                    value={product.review}
-                                    onChange={(e) => setProduct({ ...product, review: e.target.value })}
-                                />
-
-
-                            </div>
-                            <div>
-                                <input
-                                    type="number"
-                                    placeholder="star"
-                                    value={product.star}
-                                    onChange={(e) => { 
-                                        if (e.target.value <= 5) 
-                                        setProduct({ ...product, star: e.target.value })
-                                     }}
-                                />
-
-
-                            </div>
-
-                            <div>
-                                <select onChange={(e) => setProduct({ ...product, bestSell: e.target.value })} value={product.bestSell}>
-                                    <option value="">Best Selling?</option>
-                                    <option value="true">Yes</option>
-                                    <option value="false">No</option>
-                                </select>
+                        <div className="add-product-form-row">
+                            <div className="add-product-form-group">
                                 <div>
+                                    <input
+                                        type="number"
+                                        placeholder="review"
+                                        value={product.review}
+                                        onChange={(e) => setProduct({ ...product, review: e.target.value })}
+                                    />
+                                </div>
+                                <div>
+                                    <input
+                                        type="number"
+                                        placeholder="star"
+                                        value={product.star}
+                                        onChange={(e) => {
+                                            if (e.target.value <= 5)
+                                                setProduct({ ...product, star: e.target.value })
+                                        }}
+                                    />
+                                </div>
+                                <div>
+                                    <select onChange={(e) => setProduct({ ...product, bestSell: e.target.value })} value={product.bestSell}>
+                                        <option value="">Best Selling?</option>
+                                        <option value="true">Yes</option>
+                                        <option value="false">No</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-
                         <div className="add-product-form-row">
-                            <div className="add-product-form-group">
-                                <input
-                                    type="file"
-                                    name="imgurl1"
-                                    onChange={handleImageUpload}
-                                />
-                            </div>
-                            <div className="add-product-form-group">
-                                <input
-                                    type="file"
-                                    name="imgurl2"
-                                    onChange={handleImageUpload}
-                                />
-                            </div>
-                            <div className="add-product-form-group">
-                                <input
-                                    type="file"
-                                    name="imgurl3"
-                                    onChange={handleImageUpload}
-                                />
-                            </div>
-                            <div className="add-product-form-group">
-                                <input
-                                    type="file"
-                                    name="imgurl4"
-                                    onChange={handleImageUpload}
-                                />
-                            </div>
-                            <div className="add-product-form-group">
-                                <input
-                                    type="file"
-                                    name="imgurl5"
-                                    onChange={handleImageUpload}
-                                />
-                            </div>
+                            {[1, 2, 3, 4, 5].map((index) => (
+                                <div key={index} className="add-product-form-group">
+                                    <div className="add-product-form-img">
+                                        {product[`imgurl${index}`] && (
+                                            <img 
+                                                src={product[`imgurl${index}`]} 
+                                                alt={`Preview ${index}`}
+                                                className="preview-img"
+                                            />
+                                        )}
+                                        <input
+                                            type="file"
+                                            name={`imgurl${index}`}
+                                            onChange={handleImageUpload}
+                                            accept="image/*"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                         {[1, 2, 3, 4].map((index) => (
                             <div key={index} className="add-product-form-row">
@@ -299,4 +275,3 @@ const UpdateProductPage = () => {
 };
 
 export default UpdateProductPage;
-

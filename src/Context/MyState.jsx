@@ -43,7 +43,7 @@ function MyState({ children }) {
                     categoryMap[doc.id] = data.subcategories || [];
                 });
                 setCategorie(categoryMap);
-                console.log("Categories loaded:", categoryMap);
+             
             }, (error) => {
                 console.error("Error in categories snapshot:", error);
             });
@@ -56,28 +56,28 @@ function MyState({ children }) {
 
     // Add New Category
     const addNewCategory = async (categoryName) => {
-        console.log("🔵 addNewCategory called with:", categoryName);
+      
         
         try {
             const formattedName = categoryName.trim();
             
             if (!formattedName) {
-                console.log("❌ Empty category name");
+              
                 toast.error("Category name cannot be empty.");
                 return;
             }
 
-            console.log("🔵 Checking if category exists:", formattedName);
+          
             const docRef = doc(fireDB, "categories", formattedName);
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                console.log("❌ Category already exists");
+               
                 toast.error(`Category "${formattedName}" already exists.`);
                 return;
             }
 
-            console.log("🔵 Creating new category document...");
+          
             await setDoc(docRef, {
                 id: formattedName,
                 name: formattedName,
@@ -86,7 +86,6 @@ function MyState({ children }) {
                 subcategoryImages: {}
             });
 
-            console.log("✅ Category added successfully to Firestore");
             toast.success(`Category "${formattedName}" added successfully.`);
         } catch (error) {
             console.error("❌ Error adding category:", error);
@@ -97,7 +96,7 @@ function MyState({ children }) {
 
     // Delete Category
     const deleteCategory = async (categoryToDelete) => {
-        console.log("🔵 deleteCategory called with:", categoryToDelete);
+     
         
         try {
             const formattedName = categoryToDelete.trim();
@@ -115,7 +114,7 @@ function MyState({ children }) {
             }
 
             await deleteDoc(ref);
-            console.log("✅ Category deleted successfully");
+          
             toast.success(`Category "${formattedName}" deleted successfully.`);
         } catch (error) {
             console.error("❌ Error deleting category:", error);
@@ -125,7 +124,7 @@ function MyState({ children }) {
 
     // Update Category
     const updateCategory = async (oldCategoryName, newCategoryName) => {
-        console.log("🔵 updateCategory called:", oldCategoryName, "→", newCategoryName);
+      
         
         try {
             const formattedOld = oldCategoryName.trim();
@@ -199,7 +198,7 @@ function MyState({ children }) {
             // Delete old category
             await deleteDoc(oldRef);
 
-            console.log("✅ Category updated successfully");
+      
             toast.success(`Category updated from "${formattedOld}" to "${formattedNew}".`);
         } catch (error) {
             console.error("❌ Error updating category:", error);
@@ -210,8 +209,7 @@ function MyState({ children }) {
 
     // Add New Subcategory
     const addNewSubcategory = async (category, subcategoryName) => {
-        console.log("🔵 addNewSubcategory called:", subcategoryName, "to", category);
-        
+      
         try {
             const formattedSub = subcategoryName.trim();
             
@@ -244,7 +242,7 @@ function MyState({ children }) {
                 subcategories: updatedSubs
             });
 
-            console.log("✅ Subcategory added successfully");
+          
             toast.success(`Subcategory "${formattedSub}" added to "${category}".`);
         } catch (error) {
             console.error("❌ Error adding subcategory:", error);
@@ -254,8 +252,7 @@ function MyState({ children }) {
 
     // Delete Subcategory
     const deleteSubcategory = async (category, subcategoryName) => {
-        console.log("🔵 deleteSubcategory called:", subcategoryName, "from", category);
-        
+    
         try {
             const formattedSub = subcategoryName.trim();
             if (!formattedSub) {
@@ -287,7 +284,7 @@ function MyState({ children }) {
                 subcategories: updatedSubs
             });
 
-            console.log("✅ Subcategory deleted successfully");
+         
             toast.success(`Subcategory "${formattedSub}" deleted from "${category}".`);
         } catch (error) {
             console.error("❌ Error deleting subcategory:", error);
@@ -297,8 +294,7 @@ function MyState({ children }) {
 
     // Update Subcategory
     const updateSubcategory = async (category, oldSubcategoryName, newSubcategoryName) => {
-        console.log("🔵 updateSubcategory called:", oldSubcategoryName, "→", newSubcategoryName, "in", category);
-        
+    
         try {
             const formattedOld = oldSubcategoryName.trim();
             const formattedNew = newSubcategoryName.trim();
@@ -373,7 +369,7 @@ function MyState({ children }) {
 
             await Promise.all(updatePromises);
 
-            console.log("✅ Subcategory updated successfully");
+           
             toast.success(`Subcategory updated from "${formattedOld}" to "${formattedNew}" in "${category}".`);
         } catch (error) {
             console.error("❌ Error updating subcategory:", error);
@@ -383,20 +379,20 @@ function MyState({ children }) {
     };
 
     useEffect(() => {
-        console.log("🟢 MyState useEffect running");
+       
         let unsubscribeProducts = null;
         let unsubscribeCategories = null;
 
         try {
             unsubscribeProducts = getAllProductFunction();
             unsubscribeCategories = getCategoriesFromFirestore();
-            console.log("✅ Listeners set up successfully");
+        
         } catch (error) {
             console.error("❌ Error setting up listeners:", error);
         }
 
         return () => {
-            console.log("🔴 MyState cleanup running");
+          
             try {
                 if (unsubscribeProducts && typeof unsubscribeProducts === 'function') {
                     unsubscribeProducts();
@@ -410,8 +406,7 @@ function MyState({ children }) {
         };
     }, []);
 
-    console.log("🟡 MyState rendering, categories:", categories);
-
+  
     return (
         <MyContext.Provider value={{
             loading,

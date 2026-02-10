@@ -60,13 +60,13 @@ const UserDashboard = () => {
                         </div>
                         {/* main 2 */}
                         {getAllOrder.filter((obj) => obj.userid === user?.uid).map((order, index) => {
-                            // console.log(order);
+                          
                             return (
                                 <div key={index}>
                                     {order.cartItems.map((item, index) => {
-                                        // console.log('item', item);
+                                      
                                         const { id, date, quantity, price, title, imgurl1, category } = item
-                                        // console.log('order', order)
+                                     
                                         const { status } = order
                                         return (
                                             <div key={index} className="mt-5 flex flex-col overflow-hidden rounded-xl border border-indigo-100 md:flex-row">
