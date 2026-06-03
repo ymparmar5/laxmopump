@@ -8,7 +8,7 @@ const YouTubeSection = () => {
         <div className="content-card">
           <div className="video-side">
             <div className="video-frame">
-              <iframe width="560" height="315" src="https://www.youtube.com/embed/NLN0R8RXLmA?si=u1a0jNjkCJEZ8RdN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+              <iframe width="560" height="315" src="https://www.youtube.com/embed/7kuiDE4q_GU?si=S2cVn-Pa5H3IAl81" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
           </div>
           
