@@ -25,8 +25,10 @@ const AddUpdateImage = () => {
 
   const [homeImages, setHomeImages] = useState(initialImageState);
   const [aboutImages, setAboutImages] = useState(initialImageState);
+  const [catalogImages, setCatalogImages] = useState(initialImageState);
   const [previewHomeImages, setPreviewHomeImages] = useState([]);
   const [previewAboutImages, setPreviewAboutImages] = useState([]);
+  const [previewCatalogImages, setPreviewCatalogImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [uploadingImages, setUploadingImages] = useState({});
   const [updatingImages, setUpdatingImages] = useState({});
@@ -47,7 +49,7 @@ const AddUpdateImage = () => {
   }), []);
 
   const saveImages = async (type) => {
-    const payload = type === 'home' ? homeImages : aboutImages;
+    const payload = type === 'home' ? homeImages : type === 'about' ? aboutImages : catalogImages;
     
     // Check if at least one image is uploaded
     const hasImages = Object.keys(payload).some(key => 
@@ -72,8 +74,10 @@ const AddUpdateImage = () => {
       const newInitialState = createInitialState();
       if (type === 'home') {
         setHomeImages(newInitialState);
-      } else {
+      } else if (type === 'about') {
         setAboutImages(newInitialState);
+      } else {
+        setCatalogImages(newInitialState);
       }
     } catch (error) {
       toast.error("Failed to add images. Please try again.");
@@ -110,8 +114,10 @@ const AddUpdateImage = () => {
       const url = await uploadImage(file);
       if (type === 'home') {
         setHomeImages((prev) => ({ ...prev, [field]: url }));
-      } else {
+      } else if (type === 'about') {
         setAboutImages((prev) => ({ ...prev, [field]: url }));
+      } else {
+        setCatalogImages((prev) => ({ ...prev, [field]: url }));
       }
       toast.success("Image uploaded successfully!");
     } catch (error) {
@@ -186,19 +192,23 @@ const AddUpdateImage = () => {
       const querySnapshot = await getDocs(collection(fireDB, "Images"));
       const home = [];
       const about = [];
+      const catalog = [];
       
       querySnapshot.forEach((docSnapshot) => {
         const data = { id: docSnapshot.id, ...docSnapshot.data() };
         if (data.type === "home") home.push(data);
         if (data.type === "about") about.push(data);
+        if (data.type === "catalog") catalog.push(data);
       });
       
       // Sort by timestamp (newest first)
       home.sort((a, b) => b.time?.seconds - a.time?.seconds);
       about.sort((a, b) => b.time?.seconds - a.time?.seconds);
+      catalog.sort((a, b) => b.time?.seconds - a.time?.seconds);
       
       setPreviewHomeImages(home);
       setPreviewAboutImages(about);
+      setPreviewCatalogImages(catalog);
     } catch (error) {
       toast.error("Failed to fetch images");
       console.error("Fetch error:", error);
@@ -621,6 +631,58 @@ const AddUpdateImage = () => {
           >
             {loading ? 'Saving...' : 'Save About Images'}
           </button>
+      </div>
+
+      {/* Catalog Banner Images */}
+      <div className="add-product-form-wrapper" style={{ marginTop: '40px' }}>
+        <div className="add-product-form-header">
+          <h2>Add Catalog Page Banner</h2>
+          <p style={{ color: '#666', fontSize: '14px', margin: '5px 0' }}>
+            Upload the hero banner shown at the top of the Catalog page (imgurl1 is used as the banner)
+          </p>
+        </div>
+        <div className="add-product-form">
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', 
+            gap: '15px',
+            marginBottom: '20px'
+          }}>
+            {renderImageInputs("catalog", catalogImages)}
+          </div>
+        </div>
+        
+        <div className="preview-gallery" style={{ marginTop: '30px' }}>
+          <h3 style={{ marginBottom: '15px', color: '#2d3748', fontSize: '18px' }}>
+            Saved Catalog Banner Images:
+          </h3>
+          {previewCatalogImages.length > 0 ? (
+            renderPreviews(previewCatalogImages, 'catalog')
+          ) : (
+            <div style={{ 
+              textAlign: 'center', 
+              padding: '40px', 
+              color: '#718096', 
+              fontStyle: 'italic',
+              backgroundColor: '#f7fafc',
+              borderRadius: '8px',
+              border: '2px dashed #e2e8f0'
+            }}>
+              No catalog banner images saved yet.
+            </div>
+          )}
+        </div>
+        <button 
+          className="add-product-add-btn" 
+          onClick={() => saveImages("catalog")}
+          disabled={loading}
+          style={{ 
+            opacity: loading ? 0.6 : 1,
+            cursor: loading ? 'not-allowed' : 'pointer'
+          }}
+        >
+          {loading ? 'Saving...' : 'Save Catalog Banner'}
+        </button>
       </div>
 
     </div>

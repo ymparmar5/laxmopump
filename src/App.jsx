@@ -25,6 +25,8 @@ import TermsAndConditions from "./Pages/TermsAndConditions";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import Certificates from "./Pages/Certificates";
 import AddUpdateImage from "./Components/Admin/AddUpdateImage";
+import Catalog from "./Pages/Catalog";
+import AddCatalog from "./Components/Admin/AddCatalog";
 
 const App = () => {
 
@@ -48,6 +50,7 @@ const App = () => {
           <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/tandc" element={<TermsAndConditions />} />
           <Route path="/certificates" element={<Certificates />} />
+          <Route path="/catalog" element={<Catalog />} />
 
           <Route path="/user" element={
             <ProtectedRouteForUser>
@@ -69,6 +72,11 @@ const App = () => {
             <Route path="/AddUpdateImage" element={
             <ProtectedRouteForAdmin >
               <AddUpdateImage />
+            </ProtectedRouteForAdmin>} />
+
+            <Route path="/AddCatalog" element={
+            <ProtectedRouteForAdmin >
+              <AddCatalog />
             </ProtectedRouteForAdmin>} />
 
           <Route path="/update-product/:id" element={

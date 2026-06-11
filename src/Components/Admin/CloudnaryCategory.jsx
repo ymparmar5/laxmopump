@@ -4,7 +4,7 @@ import { Cloudinary } from 'cloudinary-core';
 const cloudinaryCore = new Cloudinary({ cloud_name: 'dn5vvxkra' });
 
 const CLOUD_NAME = "dn5vvxkra";
-const UPLOAD_PRESET = "category";
+const UPLOAD_PRESET = "Images";
 
 export const uploadToCloudinary = async (file) => {
   const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;

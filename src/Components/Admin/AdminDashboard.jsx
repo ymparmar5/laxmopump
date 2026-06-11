@@ -44,6 +44,9 @@ const AdminDashboard = () => {
                 <Link to={'/AddUpdateImage'}>
                     <button className="compact-button">Add/Update Images</button>
                 </Link>
+                <Link to={'/AddCatalog'}>
+                    <button className="compact-button">Manage Catalogs</button>
+                </Link>
 
                 <button className="compact-button" onClick={handleLogout}> Logout </button>
 
