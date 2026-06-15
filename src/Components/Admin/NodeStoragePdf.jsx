@@ -41,8 +41,9 @@ export const uploadPdfNode = (file, onProgress) => {
     xhr.addEventListener("error", () => reject(new Error("Network error during PDF upload")));
     xhr.addEventListener("abort", () => reject(new Error("PDF upload aborted")));
 
-    // Point this to your backend server port
-    xhr.open("POST", "http://localhost:5000/upload-pdf");
+    // Use environment variable for backend URL (fallback to localhost:5000 for local dev if missing)
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+    xhr.open("POST", `${backendUrl}/upload-pdf`);
     xhr.send(formData);
   });
 };
