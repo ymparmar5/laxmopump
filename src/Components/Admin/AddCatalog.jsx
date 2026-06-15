@@ -5,7 +5,8 @@ import { fireDB } from "../../FireBase/FireBaseConfig";
 import { useNavigate } from "react-router";
 import "../../Style/AddProductPage.css";
 import { uploadImage } from "./CloudnaryImages";
-import { uploadPdf, getViewUrl } from "./CloudnaryPdf"; // Cloudinary raw/upload
+import { getViewUrl } from "./CloudnaryPdf"; // Cloudinary raw/upload
+import { uploadPdfNode } from "./NodeStoragePdf";
 
 const AddCatalog = () => {
   const navigate = useNavigate();
@@ -69,7 +70,7 @@ const AddCatalog = () => {
     }
   };
 
-  /* ── PDF upload (Firebase Storage) ── */
+  /* ── PDF upload ── */
   const handlePdfUpload = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -77,10 +78,11 @@ const AddCatalog = () => {
     if (file.size > 30 * 1024 * 1024) { toast.error("PDF must be < 30 MB"); return; }
     setPdfProgress(0);
     try {
-      const url = await uploadPdf(file, (pct) => setPdfProgress(pct));
+      const url = await uploadPdfNode(file, (pct) => setPdfProgress(pct));
       setForm((p) => ({ ...p, pdfUrl: url }));
       toast.success("PDF uploaded successfully!");
-    } catch {
+    } catch (err) {
+      console.error(err);
       toast.error("PDF upload failed");
     } finally {
       setPdfProgress(null);
@@ -134,21 +136,21 @@ const AddCatalog = () => {
     finally { setUpdatingMap((p) => ({ ...p, [key]: false })); }
   };
 
-  /* ── inline PDF update (Firebase Storage) ── */
+  /* ── inline PDF update ── */
   const handleUpdatePdf = async (file, id) => {
     if (!file) return;
     const key = `${id}-pdf`;
     setUpdatingMap((p) => ({ ...p, [key]: true }));
     setUpdatePdfProgress((p) => ({ ...p, [key]: 0 }));
     try {
-      const url = await uploadPdf(file, (pct) =>
-        setUpdatePdfProgress((p) => ({ ...p, [key]: pct }))
-      );
+      const url = await uploadPdfNode(file, (pct) => setUpdatePdfProgress((p) => ({ ...p, [key]: pct })));
       await updateDoc(doc(fireDB, "catalogs", id), { pdfUrl: url });
       toast.success("PDF updated!");
       await fetchCatalogs();
-    } catch { toast.error("PDF update failed"); }
-    finally {
+    } catch (err) {
+      console.error(err);
+      toast.error("PDF update failed");
+    } finally {
       setUpdatingMap((p) => ({ ...p, [key]: false }));
       setUpdatePdfProgress((p) => ({ ...p, [key]: null }));
     }
@@ -214,7 +216,7 @@ const AddCatalog = () => {
         <div className="add-product-form-header">
           <h2>Add New Catalog</h2>
           <p style={{ color: "#666", fontSize: 14, margin: "5px 0" }}>
-            Upload a banner image and PDF. Both are stored on Cloudinary.
+            Upload a banner image (Cloudinary) and PDF (Local Server).
           </p>
         </div>
 
@@ -256,19 +258,19 @@ const AddCatalog = () => {
             )}
           </div>
 
-          {/* PDF — Cloudinary raw/upload */}
+          {/* PDF — Local Server */}
           <div className="upload-box">
-            <label>📄 Catalog PDF * <span style={{ fontSize: 11, fontWeight: 400, color: "#718096" }}>(stored on Cloudinary)</span></label>
+            <label>📄 Catalog PDF * <span style={{ fontSize: 11, fontWeight: 400, color: "#718096" }}>(stored on Local Server)</span></label>
             <small style={{ color: "#718096", fontSize: 12 }}>PDF only — max 30 MB</small>
             <input type="file" accept="application/pdf"
               onChange={handlePdfUpload} disabled={pdfProgress !== null} />
             {pdfProgress !== null && (
-              <ProgressBar percent={pdfProgress} label="Uploading PDF to Cloudinary…" />
+              <ProgressBar percent={pdfProgress} label="Uploading PDF…" />
             )}
             {form.pdfUrl && pdfProgress === null && (
               <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#22863a", fontSize: 13, fontWeight: 600 }}>
                 <i className="fa-solid fa-circle-check" />
-                PDF ready —{" "}
+                PDF ready ({form.pdfUrl.includes("localhost") ? "Local Server" : form.pdfUrl.includes("firebasestorage") ? "Firebase" : "Cloudinary"}) —{" "}
                 <a href={getViewUrl(form.pdfUrl)} target="_blank" rel="noreferrer"
                   style={{ color: "#3182ce", textDecoration: "underline" }}>Preview</a>
               </div>
@@ -343,7 +345,9 @@ const AddCatalog = () => {
 
                 {/* PDF update */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <p style={{ margin: 0, fontWeight: 600, fontSize: 13, color: "#4a5568" }}>PDF File (Cloudinary)</p>
+                  <p style={{ margin: 0, fontWeight: 600, fontSize: 13, color: "#4a5568" }}>
+                    PDF File ({cat.pdfUrl?.includes("localhost") ? "Local Server" : cat.pdfUrl?.includes("firebasestorage") ? "Firebase" : "Cloudinary"})
+                  </p>
                   {cat.pdfUrl ? (
                     <a href={getViewUrl(cat.pdfUrl)} target="_blank" rel="noreferrer" className="pdf-link">
                       <i className="fa-solid fa-file-pdf fa-lg" />
