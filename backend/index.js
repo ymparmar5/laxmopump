@@ -48,7 +48,7 @@ app.post('/upload-pdf', upload.single('file'), (req, res) => {
   }
 
   // Construct the public URL for the uploaded file
-  let baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+  let baseUrl = process.env.BASE_URL || (req.get('host') && req.get('host').includes('localhost') ? `http://${req.get('host')}` : 'https://www.laxmopump.com');
   if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
   const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
 
@@ -65,7 +65,7 @@ app.post('/upload-image', upload.single('file'), (req, res) => {
   }
 
   // Construct the public URL for the uploaded file
-  let baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+  let baseUrl = process.env.BASE_URL || (req.get('host') && req.get('host').includes('localhost') ? `http://${req.get('host')}` : 'https://www.laxmopump.com');
   if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
   const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
 

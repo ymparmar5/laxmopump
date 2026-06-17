@@ -42,7 +42,7 @@ export const uploadPdfNode = (file, onProgress) => {
     xhr.addEventListener("abort", () => reject(new Error("PDF upload aborted")));
 
     // Use environment variable for backend URL (fallback to localhost:5000 for local dev if missing)
-    let backendUrl = 'http://localhost:5000';
+    let backendUrl = import.meta.env.DEV ? 'http://localhost:5000' : 'https://www.laxmopump.com';
     if (backendUrl.endsWith('/')) backendUrl = backendUrl.slice(0, -1);
     xhr.open("POST", `${backendUrl}/upload-pdf`);
     xhr.send(formData);

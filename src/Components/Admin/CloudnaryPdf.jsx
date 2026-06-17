@@ -17,7 +17,7 @@ export const getViewUrl = (url) => {
 
 export const uploadPdf = (file, onProgress) => {
   return new Promise((resolve, reject) => {
-    const xhr      = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     const formData = new FormData();
 
     formData.append('file', file);
@@ -54,7 +54,7 @@ export const uploadPdf = (file, onProgress) => {
     xhr.addEventListener('error', () => reject(new Error('Network error during PDF upload')));
     xhr.addEventListener('abort', () => reject(new Error('PDF upload aborted')));
 
-    let backendUrl = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+    let backendUrl = import.meta.env.DEV ? "http://localhost:5000" : "https://www.laxmopump.com";
     if (backendUrl.endsWith('/')) backendUrl = backendUrl.slice(0, -1);
     xhr.open('POST', `${backendUrl}/upload-pdf`);
     xhr.send(formData);
