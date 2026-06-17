@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import 'dotenv/config';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -35,9 +36,9 @@ const storage = multer.diskStorage({
   }
 });
 
-const upload = multer({ 
+const upload = multer({
   storage,
-  limits: { fileSize: 30 * 1024 * 1024 } // 30MB limit for PDFs
+  limits: { fileSize: 100 * 1024 * 1024 } // 30MB limit for PDFs
 });
 
 // Upload Endpoint
@@ -45,13 +46,31 @@ app.post('/upload-pdf', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
-  
+
   // Construct the public URL for the uploaded file
-  // In a real production scenario, this should be your actual domain
-  const fileUrl = `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`;
-  
+  let baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+  if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+  const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
+
   res.json({
     message: 'File uploaded successfully',
+    url: fileUrl
+  });
+});
+
+// Upload Endpoint for Images
+app.post('/upload-image', upload.single('file'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  // Construct the public URL for the uploaded file
+  let baseUrl = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
+  if (baseUrl.endsWith('/')) baseUrl = baseUrl.slice(0, -1);
+  const fileUrl = `${baseUrl}/uploads/${req.file.filename}`;
+
+  res.json({
+    message: 'Image uploaded successfully',
     url: fileUrl
   });
 });

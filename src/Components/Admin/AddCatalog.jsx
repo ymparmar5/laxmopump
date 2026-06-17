@@ -92,7 +92,6 @@ const AddCatalog = () => {
   /* ── save new catalog ── */
   const saveCatalog = async () => {
     if (!form.title.trim()) { toast.error("Title is required"); return; }
-    if (!form.bannerUrl) { toast.error("Upload a banner image first"); return; }
     if (!form.pdfUrl) { toast.error("Upload a PDF first"); return; }
     setLoading(true);
     try {
@@ -232,31 +231,7 @@ const AddCatalog = () => {
             onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))}
           />
 
-          {/* Description */}
-          <label style={{ fontWeight: 600, color: "#4a5568", fontSize: 14, display: "block", marginBottom: 4 }}>
-            Short Description
-          </label>
-          <textarea
-            className="cat-input"
-            rows={3}
-            placeholder="Brief description shown on the catalog card…"
-            value={form.description}
-            onChange={(e) => setForm((p) => ({ ...p, description: e.target.value }))}
-            style={{ resize: "vertical" }}
-          />
 
-          {/* Banner */}
-          <div className="upload-box">
-            <label>🖼 Banner / Cover Image *</label>
-            <small style={{ color: "#718096", fontSize: 12 }}>JPEG, PNG, WebP — max 5 MB</small>
-            <input type="file" accept="image/jpeg,image/jpg,image/png,image/webp"
-              onChange={handleBannerUpload} disabled={uploadingBanner} />
-            {uploadingBanner && <Spinner label="Uploading to Cloudinary…" />}
-            {form.bannerUrl && (
-              <img src={form.bannerUrl} alt="preview"
-                style={{ height: 120, borderRadius: 8, border: "2px solid #e2e8f0", objectFit: "cover", marginTop: 4 }} />
-            )}
-          </div>
 
           {/* PDF — Local Server */}
           <div className="upload-box">
@@ -270,7 +245,7 @@ const AddCatalog = () => {
             {form.pdfUrl && pdfProgress === null && (
               <div style={{ display: "flex", alignItems: "center", gap: 8, color: "#22863a", fontSize: 13, fontWeight: 600 }}>
                 <i className="fa-solid fa-circle-check" />
-                PDF ready ({form.pdfUrl.includes("localhost") ? "Local Server" : form.pdfUrl.includes("firebasestorage") ? "Firebase" : "Cloudinary"}) —{" "}
+                PDF ready ({form.pdfUrl.includes("firebasestorage") ? "Firebase" : form.pdfUrl.includes("cloudinary") ? "Cloudinary" : "Backend Server"}) —{" "}
                 <a href={getViewUrl(form.pdfUrl)} target="_blank" rel="noreferrer"
                   style={{ color: "#3182ce", textDecoration: "underline" }}>Preview</a>
               </div>
@@ -317,8 +292,10 @@ const AddCatalog = () => {
                   )}
                 </div>
                 <button onClick={() => deleteCatalog(cat.id)}
-                  style={{ padding: "7px 14px", fontSize: 12, background: "#ef4444", color: "#fff",
-                    border: "none", borderRadius: 6, cursor: "pointer", fontWeight: 500, flexShrink: 0 }}>
+                  style={{
+                    padding: "7px 14px", fontSize: 12, background: "#ef4444", color: "#fff",
+                    border: "none", borderRadius: 6, cursor: "pointer", fontWeight: 500, flexShrink: 0
+                  }}>
                   Delete
                 </button>
               </div>
@@ -331,8 +308,10 @@ const AddCatalog = () => {
                     <img src={cat.bannerUrl} alt="banner"
                       style={{ width: "100%", height: 140, objectFit: "cover", borderRadius: 8, border: "2px solid #e2e8f0" }} />
                   ) : (
-                    <div style={{ height: 140, border: "2px dashed #cbd5e0", borderRadius: 8,
-                      display: "flex", alignItems: "center", justifyContent: "center", color: "#a0aec0", fontSize: 13 }}>
+                    <div style={{
+                      height: 140, border: "2px dashed #cbd5e0", borderRadius: 8,
+                      display: "flex", alignItems: "center", justifyContent: "center", color: "#a0aec0", fontSize: 13
+                    }}>
                       No banner
                     </div>
                   )}
@@ -346,7 +325,7 @@ const AddCatalog = () => {
                 {/* PDF update */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                   <p style={{ margin: 0, fontWeight: 600, fontSize: 13, color: "#4a5568" }}>
-                    PDF File ({cat.pdfUrl?.includes("localhost") ? "Local Server" : cat.pdfUrl?.includes("firebasestorage") ? "Firebase" : "Cloudinary"})
+                    PDF File ({cat.pdfUrl?.includes("firebasestorage") ? "Firebase" : cat.pdfUrl?.includes("cloudinary") ? "Cloudinary" : "Backend Server"})
                   </p>
                   {cat.pdfUrl ? (
                     <a href={getViewUrl(cat.pdfUrl)} target="_blank" rel="noreferrer" className="pdf-link">
@@ -354,8 +333,10 @@ const AddCatalog = () => {
                       View / Download PDF
                     </a>
                   ) : (
-                    <div style={{ height: 60, border: "2px dashed #cbd5e0", borderRadius: 8,
-                      display: "flex", alignItems: "center", justifyContent: "center", color: "#a0aec0", fontSize: 13 }}>
+                    <div style={{
+                      height: 60, border: "2px dashed #cbd5e0", borderRadius: 8,
+                      display: "flex", alignItems: "center", justifyContent: "center", color: "#a0aec0", fontSize: 13
+                    }}>
                       No PDF
                     </div>
                   )}
