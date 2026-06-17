@@ -14,8 +14,6 @@ const AddCatalog = () => {
   const createEmpty = useCallback(
     () => ({
       title: "",
-      description: "",
-      bannerUrl: "",
       pdfUrl: "",
       time: Timestamp.now(),
       date: new Date().toLocaleString("en-US", {
@@ -30,7 +28,6 @@ const AddCatalog = () => {
   const [form, setForm] = useState(createEmpty());
   const [catalogs, setCatalogs] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [uploadingBanner, setUploadingBanner] = useState(false);
   const [pdfProgress, setPdfProgress] = useState(null); // null = idle, 0-100 = uploading
   const [updatingMap, setUpdatingMap] = useState({});
   const [updatePdfProgress, setUpdatePdfProgress] = useState({});
@@ -51,24 +48,7 @@ const AddCatalog = () => {
 
   useEffect(() => { fetchCatalogs(); }, [fetchCatalogs]);
 
-  /* ── banner upload (Cloudinary) ── */
-  const handleBannerUpload = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const valid = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-    if (!valid.includes(file.type)) { toast.error("JPEG, PNG, or WebP only"); return; }
-    if (file.size > 5 * 1024 * 1024) { toast.error("Image must be < 5 MB"); return; }
-    setUploadingBanner(true);
-    try {
-      const url = await uploadImage(file);
-      setForm((p) => ({ ...p, bannerUrl: url }));
-      toast.success("Banner uploaded!");
-    } catch {
-      toast.error("Banner upload failed");
-    } finally {
-      setUploadingBanner(false);
-    }
-  };
+
 
   /* ── PDF upload ── */
   const handlePdfUpload = async (e) => {
@@ -121,19 +101,7 @@ const AddCatalog = () => {
     } catch { toast.error("Delete failed"); }
   };
 
-  /* ── inline banner update ── */
-  const handleUpdateBanner = async (file, id) => {
-    if (!file) return;
-    const key = `${id}-banner`;
-    setUpdatingMap((p) => ({ ...p, [key]: true }));
-    try {
-      const url = await uploadImage(file);
-      await updateDoc(doc(fireDB, "catalogs", id), { bannerUrl: url });
-      toast.success("Banner updated!");
-      await fetchCatalogs();
-    } catch { toast.error("Update failed"); }
-    finally { setUpdatingMap((p) => ({ ...p, [key]: false })); }
-  };
+
 
   /* ── inline PDF update ── */
   const handleUpdatePdf = async (file, id) => {
@@ -215,7 +183,7 @@ const AddCatalog = () => {
         <div className="add-product-form-header">
           <h2>Add New Catalog</h2>
           <p style={{ color: "#666", fontSize: 14, margin: "5px 0" }}>
-            Upload a banner image (Cloudinary) and PDF (Local Server).
+            Upload a PDF file to create a new catalog entry.
           </p>
         </div>
 
@@ -255,8 +223,8 @@ const AddCatalog = () => {
           <button
             className="add-product-add-btn"
             onClick={saveCatalog}
-            disabled={loading || uploadingBanner || pdfProgress !== null}
-            style={{ opacity: (loading || uploadingBanner || pdfProgress !== null) ? 0.6 : 1, marginTop: 8 }}
+            disabled={loading || pdfProgress !== null}
+            style={{ opacity: (loading || pdfProgress !== null) ? 0.6 : 1, marginTop: 8 }}
           >
             {loading ? "Saving…" : "Save Catalog"}
           </button>
@@ -287,9 +255,6 @@ const AddCatalog = () => {
                 <div>
                   <h4>{cat.title}</h4>
                   <small>Added: {cat.date}</small>
-                  {cat.description && (
-                    <p style={{ margin: "4px 0 0", fontSize: 13, color: "#718096" }}>{cat.description}</p>
-                  )}
                 </div>
                 <button onClick={() => deleteCatalog(cat.id)}
                   style={{
@@ -301,26 +266,7 @@ const AddCatalog = () => {
               </div>
 
               <div className="cat-grid">
-                {/* Banner update */}
-                <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                  <p style={{ margin: 0, fontWeight: 600, fontSize: 13, color: "#4a5568" }}>Banner Image</p>
-                  {cat.bannerUrl ? (
-                    <img src={cat.bannerUrl} alt="banner"
-                      style={{ width: "100%", height: 140, objectFit: "cover", borderRadius: 8, border: "2px solid #e2e8f0" }} />
-                  ) : (
-                    <div style={{
-                      height: 140, border: "2px dashed #cbd5e0", borderRadius: 8,
-                      display: "flex", alignItems: "center", justifyContent: "center", color: "#a0aec0", fontSize: 13
-                    }}>
-                      No banner
-                    </div>
-                  )}
-                  <label style={{ fontSize: 12, color: "#718096" }}>Replace banner:</label>
-                  <input type="file" accept="image/jpeg,image/jpg,image/png,image/webp"
-                    style={{ fontSize: 11 }} disabled={updatingMap[`${cat.id}-banner`]}
-                    onChange={(e) => handleUpdateBanner(e.target.files[0], cat.id)} />
-                  {updatingMap[`${cat.id}-banner`] && <Spinner label="Updating…" />}
-                </div>
+
 
                 {/* PDF update */}
                 <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
