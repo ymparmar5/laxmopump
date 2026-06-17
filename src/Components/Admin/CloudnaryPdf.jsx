@@ -54,7 +54,7 @@ export const uploadPdf = (file, onProgress) => {
     xhr.addEventListener('error', () => reject(new Error('Network error during PDF upload')));
     xhr.addEventListener('abort', () => reject(new Error('PDF upload aborted')));
 
-    let backendUrl = import.meta.env.DEV ? "http://localhost:5000" : "https://www.laxmopump.com";
+    let backendUrl = import.meta.env.DEV ? "http://localhost:5000" : "https://laxmopump.com";
     if (backendUrl.endsWith('/')) backendUrl = backendUrl.slice(0, -1);
     xhr.open('POST', `${backendUrl}/upload-pdf`);
     xhr.send(formData);
