@@ -109,28 +109,25 @@ const Catalog = () => {
                 {/* body */}
                 <div className="catalog-card-body">
                   <h3 className="catalog-card-title" style={{ margin: "0 0 16px 0", fontSize: "18px", color: "#1e293b", fontWeight: 700 }}>{cat.title}</h3>
-                  <div className="catalog-card-footer" style={{ borderTop: "1px solid #e2e8f0", paddingTop: "16px", display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-
-                    <div className="catalog-card-overlay">
-                      <div className="catalog-overlay-icons">
-                        <a
-                          href={getViewUrl(cat.pdfUrl)}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="catalog-overlay-btn catalog-overlay-btn--view"
-                          title="View PDF"
-                        >
-                          <i className="fa-solid fa-eye" />
-                        </a>
-                        <button
-                          className="catalog-overlay-btn catalog-overlay-btn--download"
-                          onClick={() => handleDownload(cat.pdfUrl, cat.title)}
-                          title="Download PDF"
-                        >
-                          <i className="fa-solid fa-download" />
-                        </button>
-                      </div>
-                    </div>
+                  <div className="catalog-card-footer" style={{ borderTop: "1px solid #e2e8f0", paddingTop: "16px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: "10px" }}>
+                    <a
+                      href={getViewUrl(cat.pdfUrl)}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="catalog-download-btn"
+                      style={{ flex: 1, justifyContent: "center", textDecoration: "none", background: "#3b82f6" }}
+                      title="View PDF"
+                    >
+                      <i className="fa-solid fa-eye" style={{ marginRight: "6px" }} /> View
+                    </a>
+                    <button
+                      className="catalog-download-btn"
+                      onClick={() => handleDownload(cat.pdfUrl, cat.title)}
+                      style={{ flex: 1, justifyContent: "center" }}
+                      title="Download PDF"
+                    >
+                      <i className="fa-solid fa-download" style={{ marginRight: "6px" }} /> Download
+                    </button>
                   </div>
                 </div>
               </article>
